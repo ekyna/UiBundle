@@ -1,0 +1,55 @@
+{% apply spaceless %}
+<?xml version="1.0" encoding="UTF-8" ?> {# TODO charset #}
+<modal>
+{% block response %}
+
+    <config><![CDATA[{{ modal.config|json_encode|raw }}]]></config>
+
+{% block title %}
+{% if modal.title %}
+    <title><![CDATA[{{ modal.title|trans({}, modal.domain)|raw }}]]></title>
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+{#{% if modal.content is not same as(null) %}#}
+    <content type="{{ modal.contentType }}"><![CDATA[
+    {%- if modal.contentType == 'form' -%}
+        {% include '@EkynaUi/flashes.html.twig' %}
+        {% if form is not defined %}
+            {% set form = modal.content %}
+        {% endif %}
+        {{ form_start(form) }}
+        {% if modal.vars.form_template is defined %}
+            {% include modal.vars.form_template with modal.vars %}
+        {% else %}
+            {% include '@EkynaUi/Modal/form.html.twig' %}
+        {% endif %}
+        {{ form_end(form) }}
+    {%- elseif modal.contentType == 'table' -%}
+        {% include '@EkynaUi/flashes.html.twig' %}
+        {{ ekyna_table_render(modal.content) }}
+    {%- elseif modal.contentType == 'twig' -%}
+        {% include modal.content with modal.vars %}
+    {%- elseif modal.contentType == 'data' -%}
+        {{ modal.content|json_encode_data|raw }}
+    {%- else -%}
+        {% include '@EkynaUi/flashes.html.twig' %}
+        {{ modal.content|raw }}
+    {%- endif -%}
+    {%- if modal.vars.extra_content is defined and modal.vars.extra_content is not empty -%}
+        {{ modal.vars.extra_content|raw }}
+    {%- endif -%}
+    ]]></content>
+{#{% endif %}#}
+{% endblock content %}
+
+{% block buttons %}
+{% if modal.buttons|length %}
+    <buttons><![CDATA[{{ modal.buttons|json_encode|raw }}]]></buttons>
+{% endif %}
+{% endblock buttons %}
+
+{% endblock response %}
+</modal>
+{% endapply %}

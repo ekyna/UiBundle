@@ -1,0 +1,69 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Ekyna\Bundle\UiBundle\Form\DataTransformer;
+
+use Ekyna\Bundle\UiBundle\Model\KeyValueContainer;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+
+/**
+ * Class HashToKeyValueArrayTransformer
+ * @package Ekyna\Bundle\UiBundle\Form\DataTransformer
+ * @author  Bart van den Burg <bart@burgov.nl>
+ * @see     https://github.com/Burgov/KeyValueFormBundle/blob/master/Form/DataTransformer/HashToKeyValueArrayTransformer.php
+ * @author  Étienne Dauvergne <contact@ekyna.com>
+ */
+class HashToKeyValueArrayTransformer implements DataTransformerInterface
+{
+    private bool $useContainerObject;
+
+
+    /**
+     * @param bool $useContainerObject Whether to return a KeyValueContainer object or simply an array
+     */
+    public function __construct(bool $useContainerObject)
+    {
+        $this->useContainerObject = $useContainerObject;
+    }
+
+    /**
+     * Doing the transformation here would be too late for the collection type to do it's resizing magic, so
+     * instead it is done in the forms PRE_SET_DATA listener
+     *
+     * @param KeyValueContainer|array $value
+     *
+     * @return KeyValueContainer|array
+     */
+    public function transform($value)
+    {
+        return $value;
+    }
+
+    /**
+     * @param KeyValueContainer|array $value
+     *
+     * @return KeyValueContainer|array
+     *
+     * @throws TransformationFailedException
+     */
+    public function reverseTransform($value)
+    {
+        $return = $this->useContainerObject ? new KeyValueContainer() : [];
+
+        foreach ($value as $data) {
+            if (['key', 'value'] != array_keys($data)) {
+                throw new TransformationFailedException();
+            }
+
+            if (array_key_exists($data['key'], $return)) {
+                throw new TransformationFailedException('Duplicate key detected');
+            }
+
+            $return[$data['key']] = $data['value'];
+        }
+
+        return $return;
+    }
+}

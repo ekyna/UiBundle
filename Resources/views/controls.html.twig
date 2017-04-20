@@ -1,0 +1,57 @@
+{% block button %}
+{% apply spaceless %}
+<{{ tag }} {{ block('attributes') }}>{{ block('icon') }} {{ block('label') }}</{{ tag }}>
+{% endapply %}
+{% endblock button %}
+
+{% block label %}
+{% apply spaceless %}
+{% if label %}{{ label|trans({}, trans_domain)|raw }}{% endif %}
+{% endapply %}
+{% endblock label %}
+
+{% block icon %}
+{% apply spaceless %}
+{% if icon %}<span class="{{ icon }}"></span>{% endif %}
+{% endapply %}
+{% endblock icon %}
+
+{% block dropdown %}
+{% apply spaceless %}
+<div class="btn-group">
+    <button {{ block('attributes') }}>
+        {{ block('icon') }} {{ block('label') }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu{% if right %} dropdown-menu-right{% endif %}">
+        {% for action_path, action_label in actions -%}
+        <li><a href="{{ action_path }}">{{ action_label|trans|raw }}</a></li>
+        {%- endfor %}
+    </ul>
+</div>
+{% endapply %}
+{% endblock dropdown %}
+
+{% block attributes %}
+{% apply spaceless %}
+{%- for attrname, attrvalue in attr -%}
+    {{- " " -}}
+    {%- if attrname in ['placeholder', 'title'] -%}
+        {{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+    {%- elseif attrvalue is same as(true) -%}
+        {{- attrname }}="{{ attrname }}"
+    {%- elseif attrvalue is not same as(false) -%}
+        {{- attrname }}="{{ attrvalue }}"
+    {%- endif -%}
+{%- endfor -%}
+{% endapply %}
+{% endblock attributes %}
+
+{% block no_image %}
+{% apply spaceless %}
+{% if no_image_path|length > 0 %}
+    <img src="{{ no_image_path }}" alt="{{ 'image.new'|trans({}, 'EkynaUi') }}"{{ block('attributes') }} />
+{% else %}
+    <img src="http://placehold.it/145x96/f7f7f7/6e829b&text={{ 'image.new'|trans({}, 'EkynaUi')|replace({' ': '+'}) }}" alt="{{ 'image.new'|trans({}, 'EkynaUi') }}"{% if style|length > 0 %} style="{{ style }}"{% endif %} />
+{% endif %}
+{% endapply %}
+{% endblock no_image %}

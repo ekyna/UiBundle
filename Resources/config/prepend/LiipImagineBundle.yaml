@@ -1,0 +1,16 @@
+# Liip Imagine
+liip_imagine:
+    resolvers:
+        default:
+            web_path:
+                cache_prefix: cache
+        local_upload:
+            web_path:
+                cache_prefix: cache/upload
+    loaders:
+        default:
+            filesystem:
+                data_root: '%kernel.project_dir%/public'
+        local_upload:
+            filesystem:
+                data_root: '%kernel.data_dir%/upload'

@@ -1,0 +1,22 @@
+ekyna_ui_form_plugins:
+    path: /js/form-plugins.json
+    controller: Ekyna\Bundle\UiBundle\Controller\FormController::plugins
+    methods: [ GET ]
+    stateless: true
+
+ekyna_ui_countries:
+    path: /js/countries.json
+    controller: Ekyna\Bundle\UiBundle\Controller\FormController::countries
+    methods: [ GET ]
+    stateless: true
+
+ekyna_ui_tinymce_config:
+    path: /js/tinymce-config.json
+    controller: Ekyna\Bundle\UiBundle\Controller\TinymceController::config
+    methods: [ GET ]
+    stateless: true
+
+ekyna_ui_tinymce_upload:
+    path: /ui/tinymce/upload
+    controller: Ekyna\Bundle\UiBundle\Controller\TinymceController::upload
+    methods: [ POST ]

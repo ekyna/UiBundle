@@ -1,0 +1,118 @@
+config:
+    packages:
+        -
+            name: ekyna-form
+            location: bundles/ekynaui/js/form
+            main: form
+        -
+            name: jquery
+            location: bundles/ekynaui/lib/jquery
+            main: jquery
+        -
+            name: jquery-ui
+            location: bundles/ekynaui/lib/jquery-ui
+            main: core
+        -
+            name: bootstrap
+            location: bundles/ekynaui/lib/bootstrap
+            main: bootstrap
+        -
+            name: intl
+            location: bundles/ekynaui/lib/intl
+            main: intl
+        -
+            name: gsap
+            location: bundles/ekynaui/lib/gsap
+            main: TweenLite
+    shim:
+        intl/intl:
+            exports: IntlPolyfill
+        underscore:
+            exports: _
+        backbone:
+            deps: ['underscore', 'jquery']
+            exports: Backbone
+        es6-promise:
+            exports: Promise
+        jquery-ui:
+            deps: ['jquery']
+        jquery/qtip:
+            deps: ['jquery']
+        jquery/match-height:
+            deps: ['jquery']
+        twig:
+            exports: Twig
+        routing:
+            exports: Routing
+        bootstrap/bootstrap:
+            deps: ['jquery']
+        bootstrap/dialog:
+            deps: ['jquery', 'bootstrap']
+            exports: 'BootstrapDialog'
+        bootstrap/colorpicker:
+            deps: ['jquery', 'bootstrap']
+        bootstrap/hover-dropdown:
+            deps: ['jquery']
+        select2:
+            deps: ['jquery']
+        ekyna-modal:
+            deps: ['require', 'jquery', 'bootstrap/dialog']
+        ekyna-dispatcher:
+            deps: ['backbone']
+        gsap/TimelineLite:
+            deps: ['plugins.CSSPlugin', 'easing.Ease']
+        gsap/TimelineMax:
+            deps: ['plugins.CSSPlugin', 'easing.Ease']
+    paths:
+        underscore: bundles/ekynaui/lib/underscore
+        backbone: bundles/ekynaui/lib/backbone
+        validator: bundles/ekynaui/lib/validator
+        es6-promise: bundles/ekynaui/lib/es6-promise
+        twig: bundles/ekynaui/lib/twig
+        moment: bundles/ekynaui/lib/moment
+        tinycolor: bundles/ekynaui/lib/tinycolor
+        select2: bundles/ekynaui/lib/select2
+        aos: bundles/ekynaui/lib/aos
+        chart: bundles/ekynaui/lib/chart
+        tinymce: bundles/ekynaui/lib/tinymce/tinymce.min
+        tinymce_config:
+            route: ekyna_ui_tinymce_config
+            params: []
+        router: bundles/fosjsrouting/js/router.min
+        routes: js/routing.json
+        ekyna-ui: bundles/ekynaui/js/ui
+        ekyna-string: bundles/ekynaui/js/string
+        ekyna-polyfill: bundles/ekynaui/js/polyfill
+        ekyna-routing: bundles/ekynaui/js/router
+        ekyna-flags: bundles/ekynaui/js/flags
+        ekyna-modal: bundles/ekynaui/js/modal
+        ekyna-clipboard-copy: bundles/ekynaui/js/clipboard-copy
+        ekyna-spinner: bundles/ekynaui/js/spinner
+        ekyna-dispatcher: bundles/ekynaui/js/dispatcher
+        ekyna-form/plugins:
+            route: ekyna_ui_form_plugins
+            params: []
+    map:
+        '*':
+            routing: ekyna-routing
+            TimelineLite: gsap/TimelineLite
+            TimelineMax: gsap/TimelineMax
+            TweenLite: gsap/TweenLite
+            TweenMax: gsap/TweenMax
+            plugins.CSSPlugin: gsap/plugins/CSSPlugin
+            easing.Ease: gsap/easing/EasePack
+build:
+    include:
+        - validator
+        - es6-promise
+        - jquery
+        - router
+        - bootstrap
+        - bootstrap/dialog
+        - ekyna-string
+        - ekyna-polyfill
+        - ekyna-routing
+        - ekyna-modal
+        - ekyna-dispatcher
+        - ekyna-ui
+        - ekyna-spinner

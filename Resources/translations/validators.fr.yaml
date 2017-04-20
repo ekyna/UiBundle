@@ -1,0 +1,3 @@
+color:
+    invalid_code: Le code %type% "%code%" n'est pas valide.
+    unknown_format: Le format du code couleur "%color%" est inconnu.

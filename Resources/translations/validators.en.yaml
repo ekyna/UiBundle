@@ -1,0 +1,3 @@
+color:
+    invalid_code: '%type% "%code%" code does not exist.'
+    unknown_format: Color code "%color%" is unknown.

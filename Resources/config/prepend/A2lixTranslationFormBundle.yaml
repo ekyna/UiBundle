@@ -1,0 +1,8 @@
+a2lix_translation_form:
+    locale_provider: default
+    locales: '%ekyna_resource.locales%'
+    default_locale: '%kernel.default_locale%'
+    required_locales: ['%kernel.default_locale%']
+#    manager_registry: doctrine
+    templating: '@EkynaUi/Form/translation.html.twig'
+#    templating: '@A2lixTranslationForm/default.html.twig'

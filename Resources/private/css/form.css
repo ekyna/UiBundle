@@ -1,0 +1,476 @@
+/**
+ *   Form Layout
+ */
+
+.form-body {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px 15px 0 15px;
+    margin-bottom: 0;
+}
+
+.form-group-sm {
+    margin-bottom: 10px;
+}
+
+.form-body.borderless {
+    border: none;
+    padding: 0;
+}
+
+.form-body label.control-label {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+label.control-label,
+div.checkbox > label {
+    position: relative;
+}
+
+label.control-label.required:after,
+div.checkbox > label.required:after {
+    content: "*";
+    color: #d9534f;
+    margin-left: 2px;
+}
+
+.form-horizontal label.control-label.required:after {
+    margin-left: 0;
+    width: 9px;
+    position: absolute;
+    top: 9px;
+    right: 5px;
+}
+
+.form-body textarea {
+    resize: none !important;
+    min-height: 34px;
+    max-height: 500px;
+}
+
+.form-with-tabs .form-body {
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+.form-footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 25px 15px 13px 15px;
+    margin: 0 -15px 0 -15px;
+}
+
+.form-footer .glyphicon {
+    margin-right: 5px;
+}
+
+.form-footer .form-group {
+    margin-bottom: 0;
+}
+
+.form-footer .btn {
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
+
+.form-body .btn small {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #d2d2d2;
+}
+
+/**
+ *  Field Box
+ */
+.form-body .control-label {
+    cursor: auto;
+    display: inline-block;
+    float: left;
+    font-weight: 600;
+    line-height: 16px;
+    margin-bottom: 0;
+    min-height: 34px;
+    padding: 9px 15px 0 15px;
+    text-align: right;
+}
+
+.form-body input:-moz-placeholder {
+    font-style: italic;
+}
+
+.form-body input:-ms-input-placeholder {
+    font-style: italic;
+}
+
+.form-body input::-webkit-input-placeholder {
+    font-style: italic;
+}
+
+.form-body .predefined {
+    position: relative;
+}
+
+.form-body .predefined input {
+    padding-left: 40px;
+}
+
+.form-body .predefined .value {
+    position: absolute;
+    top: 6px;
+}
+
+.form-body label.checkbox {
+    cursor: pointer;
+    color: #555;
+}
+
+.form-body label.radio {
+    position: relative;
+    left: -20px;
+    width: 100%;
+    cursor: pointer;
+    color: #555;
+}
+
+.form-body label.checkbox,
+.form-body label.radio {
+    font-weight: lighter;
+}
+
+.form-body label.checkbox input[type="checkbox"],
+.form-body label.checkbox input[type="radio"],
+.form-body label.radio input[type="checkbox"],
+.form-body label.radio input[type="radio"] {
+    font-size: large;
+    margin-left: 0;
+}
+
+.form-body .wysi-column {
+    float: left;
+    width: 75%;
+}
+
+.form-body .column.pull-right label {
+    display: block;
+    width: 100%;
+}
+
+.form-body .column.pull-right .ui-select {
+    width: 250px;
+}
+
+.form-body .column.pull-right .input-group {
+    margin-bottom: 10px;
+    width: 250px;
+}
+
+.form-body .column.pull-right .input-datepicker {
+    width: 250px;
+}
+
+/**
+ *  Select2 Fixes
+ */
+/*
+.form-group .select2-container--bootstrap {
+    width: 100% !important;
+}
+
+.form-group .select2-container--bootstrap .select2-selection {
+    font-family: inherit;
+}
+*/
+
+/*.select2-container,
+.select2-drop {
+    font-size: 14px;
+}
+
+.select2-container .select2-choice {
+    height: 32px;
+    padding-left: 12px;
+    line-height: 32px;
+}
+
+.select2-container-active {
+    border-radius: 5px;
+}
+
+.select2-container .select2-choice > .select2-chosen {
+    margin-right: 36px;
+}
+
+.select2-container .select2-choice .select2-arrow {
+    width: 24px;
+}
+
+.select2-container .select2-choice .select2-arrow b {
+    background-position: 3px 3px;
+}
+
+.select2-dropdown-open .select2-choice .select2-arrow b {
+    background-position: -14px 3px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+    line-height: 13px;
+    padding: 5px 7px 6px 20px;
+    margin: 3px 0 3px 3px;
+}
+
+.select2-container-multi .select2-search-choice-close {
+    top: 5px;
+    left: 5px;
+}
+
+.select2-container .select2-choice abbr {
+    width: 20px;
+    height: 16px;
+    background: none;
+}
+
+.select2-container .select2-choice abbr:before {
+    content: "\00d7";
+    display: inline-block;
+    font-size: 24px;
+    height: 16px;
+    line-height: 16px;
+    width: 20px;
+}*/
+
+.form-body .form-group .select2-container-disabled .select2-choice {
+    cursor: not-allowed;
+}
+
+.form-body .form-group .select2-container.select2-dropdown-open .select2-choice {
+    border-radius: 4px 0 0 0;
+}
+
+/* Input Group Button */
+.form-body .input-group-btn .btn {
+    padding: 6px;
+}
+
+/* Checkbox / radio */
+.form-body div.checkbox,
+.form-body div.radio {
+    padding-top: 8px;
+}
+
+.form-body .form-choices.inline div.checkbox,
+.form-body .form-choices.inline div.radio {
+    display: inline-block;
+    margin-right: 16px;
+}
+
+/* File Picker */
+.file-picker {
+    position: relative;
+    overflow: hidden;
+}
+
+.file-picker input[type="file"] {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    border: none;
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: right;
+    cursor: default;
+    width: 100%;
+    height: 100%;
+}
+
+/* Color picker */
+.colorpicker-2x .colorpicker-saturation {
+    width: 200px;
+    height: 200px;
+}
+.colorpicker-2x .colorpicker-hue,
+.colorpicker-2x .colorpicker-alpha {
+    width: 30px;
+    height: 200px;
+}
+
+.colorpicker-2x .colorpicker-color,
+.colorpicker-2x .colorpicker-color div {
+    height: 30px;
+}
+.colorpicker-2x .colorpicker-selectors {
+    height: 20px;
+}
+.colorpicker-2x .colorpicker-selectors i {
+    height: 20px;
+    width: 20px;
+}
+
+/* Image widget */
+.image-widget .thumbnail {
+    margin-bottom: 0;
+}
+
+.image-widget .children .form-group {
+    margin-bottom: 8px;
+}
+
+.image-widget .children .form-group .control-label {
+    min-height: 30px;
+}
+
+.image-widget .children .form-group:last-child {
+    margin-bottom: 0;
+}
+
+/**
+ *  Collections
+ */
+.ekyna-collection-prototype {
+    display: none;
+}
+
+.ekyna-collection .ekyna-collection-child {
+    border-bottom: 1px dotted #CCC;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+.ekyna-collection .ekyna-collection-child:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+
+.ekyna-collection .ekyna-collection-item {
+    margin: 0 -15px;
+    padding: 15px 15px 0 15px;
+    border-radius: 4px;
+    border: 1px dashed #ddd;
+    background-color: #f5f5f5;
+}
+
+.ekyna-collection .ekyna-collection-item .ekyna-collection-item {
+    background-color: #ebebeb;
+}
+
+/**
+ *  Phone number form
+ */
+.phone-number button {
+    padding: 5px 6px 6px 6px;
+}
+
+.phone-number button > span {
+    vertical-align: middle;
+}
+
+.phone-number button > span.country-flag {
+    margin-right: 4px;
+    box-shadow: 0 1px 2px 0 #cfcfcf;
+}
+
+.phone-number span.country-dial {
+    color: #999;
+    margin-right: 4px;
+}
+
+.phone-number .dropdown-menu {
+    padding: 0;
+    margin: 0;
+}
+
+.phone-number .dropdown-menu > div {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 280px;
+}
+
+.phone-number ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.phone-number ul > li {
+    padding: 5px 10px;
+    cursor: pointer;
+    line-height: 18px;
+}
+
+.phone-number ul > li:hover {
+    background-color: #e6e6e6;
+}
+
+.phone-number ul > li.active {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.phone-number ul > li > span {
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+/**
+ *  Bootstrap "extension"
+ */
+.form-body label.label-sm {
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.form-body label.label-lg {
+    /*
+    TODO
+    */
+}
+
+/**
+ * Translations forms
+ */
+.translations-forms {
+    border-bottom: 1px dotted #ddd;
+}
+
+.translations-locales > li:first-child {
+    margin-left: 180px;
+}
+
+.translations-locales > li > a {
+    font-size: 12px;
+    padding: 6px 9px;
+}
+
+.translations-fields {
+    padding-top: 15px;
+}
+
+/**
+ * Modal (yeah it should not be there ...)
+ */
+.modal.condensed .modal-body {
+    padding: 0;
+}
+.modal .modal-header .close {
+    font-size: 32px;
+    line-height: 22px;
+    margin-top: 0;
+    opacity: .3;
+}
+.modal .modal-header .close:hover {
+    opacity: .5;
+}
+
+/* Responsive */
+@media ( max-width: 767px) {
+    .form-body label.radio {
+        left: 0;
+    }
+
+    .translations-locales > li:first-child {
+        margin-left: 0;
+    }
+}

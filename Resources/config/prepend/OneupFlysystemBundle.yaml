@@ -1,0 +1,16 @@
+oneup_flysystem:
+    adapters:
+        local_ftp:
+            local:
+                location: "%kernel.data_dir%/ftp"
+        local_tinymce:
+            local:
+                location: "%kernel.project_dir%/public/tinymce"
+    filesystems:
+        local_ftp:
+            adapter: local_ftp
+            alias: local_ftp_filesystem
+            mount: local_ftp
+        local_tinymce:
+            adapter: local_tinymce
+            alias: local_tinymce_filesystem

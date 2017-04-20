@@ -1,0 +1,38 @@
+{
+    "name": "ekyna/ui-bundle",
+    "description": "Ui elements",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Etienne Dauvergne",
+            "homepage": "https://ekyna.com"
+        }
+    ],
+    "keywords": [
+        "symfony",
+        "ui",
+        "bundle"
+    ],
+    "homepage": "https://github.com/ekyna/UiBundle",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "ext-gd": "*",
+        "ext-libxml": "*",
+        "symfony/framework-bundle": "^5.0",
+        "ekyna/resource-bundle": "0.8.x-dev",
+        "ekyna/require-js-bundle": "0.8.x-dev",
+        "knplabs/knp-menu-bundle": "^3.0",
+        "a2lix/translation-form-bundle": "^3.0",
+        "php-http/guzzle6-adapter": "^2.0",
+        "excelwebzone/recaptcha-bundle": "^1.5",
+        "twig/extra-bundle": "^3.0",
+        "twig/intl-extra": "^3.3",
+        "twig/string-extra": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ekyna\\Bundle\\UiBundle\\": ""
+        }
+    }
+}
