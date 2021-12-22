@@ -19,6 +19,7 @@
         "php": ">=7.4",
         "ext-gd": "*",
         "ext-libxml": "*",
+        "symfony/asset": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "ekyna/resource-bundle": "0.8.x-dev",
         "ekyna/require-js-bundle": "0.8.x-dev",
