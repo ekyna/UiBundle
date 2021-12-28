@@ -116,3 +116,5 @@ build:
         - ekyna-dispatcher
         - ekyna-ui
         - ekyna-spinner
+    paths:
+        routes: ./js/routing.json
