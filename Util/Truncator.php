@@ -26,26 +26,11 @@ class Truncator
     private int         $charCount;
     private string      $encoding;
 
-
-    /**
-     * Creates a new truncator.
-     *
-     * @param string $html
-     * @param string $encoding
-     *
-     * @return Truncator
-     */
     public static function create(string $html, string $encoding = 'UTF-8'): Truncator
     {
         return new self($html, $encoding);
     }
 
-    /**
-     * Constructor.
-     *
-     * @param string $html
-     * @param string $encoding
-     */
     public function __construct(string $html, string $encoding = 'UTF-8')
     {
         $this->charCount = 0;
@@ -57,14 +42,6 @@ class Truncator
         $this->tempDiv->loadHTML($html, LIBXML_HTML_NOIMPLIED);
     }
 
-    /**
-     * Truncates the html string.
-     *
-     * @param int    $limit
-     * @param string $endChar
-     *
-     * @return string
-     */
     public function truncate(int $limit, string $endChar = '&hellip;'): string
     {
         $this->newDiv = new DOMDocument();
@@ -74,16 +51,6 @@ class Truncator
         return $this->newDiv->saveHTML();
     }
 
-    /**
-     * Search the end node.
-     *
-     * @param DOMNode $parseDiv
-     * @param DOMNode $newParent
-     * @param int     $limit
-     * @param string  $endChar
-     *
-     * @return bool
-     */
     private function searchEnd(DOMNode $parseDiv, DOMNode $newParent, int $limit, string $endChar): bool
     {
         foreach ($parseDiv->childNodes as $ele) {
@@ -91,24 +58,30 @@ class Truncator
                 $newEle = $this->newDiv->importNode($ele, true);
                 if (count($ele->childNodes) === 0) {
                     $newParent->appendChild($newEle);
+
                     continue;
                 }
 
                 $this->deleteChildren($newEle);
-                $newParent->appendChild($newEle);
-                $res = $this->searchEnd($ele, $newEle, $limit, $endChar);
 
-                if ($res) {
-                    return $res;
-                } else {
-                    continue;
+                $newParent->appendChild($newEle);
+
+                if ($this->searchEnd($ele, $newEle, $limit, $endChar)) {
+                    return true;
                 }
+
+                continue;
             }
 
             $length = mb_strlen($ele->nodeValue, $this->encoding);
             if ($length + $this->charCount >= $limit) {
                 $newEle = $this->newDiv->importNode($ele);
-                $pos = mb_strrpos($newEle->nodeValue, ' ', $limit - $this->charCount - $length);
+                $offset = $limit - $this->charCount - $length;
+                if (false === $pos = mb_strrpos($newEle->nodeValue, ' ', $offset)) {
+                    // TODO This results in empty tags...
+                    return true;
+                }
+
                 $newEle->nodeValue = mb_substr($newEle->nodeValue, 0, $pos) . html_entity_decode($endChar);
 
                 $newParent->appendChild($newEle);
@@ -119,16 +92,15 @@ class Truncator
             $newEle = $this->newDiv->importNode($ele);
             $newParent->appendChild($newEle);
             $this->charCount += mb_strlen($newEle->nodeValue, $this->encoding);
+
+            if ($this->charCount === $limit) {
+                return true;
+            }
         }
 
         return false;
     }
 
-    /**
-     * Delete the given node recursively.
-     *
-     * @param DOMNode $node
-     */
     private function deleteChildren(DOMNode $node): void
     {
         while (isset($node->firstChild)) {
