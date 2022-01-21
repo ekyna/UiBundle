@@ -25,7 +25,7 @@ class FAIconChoiceType extends AbstractType
                 'label'        => t('field.icon', [], 'EkynaUi'),
                 'class'        => FAIcons::class,
                 'admin_helper' => 'CMS_TAG_ICON',
-                'placeholder'  => 'value.choose',
+                'placeholder'  => t('value.choose', [], 'EkynaUi'),
                 'select2'      => false,
                 'attr'         => [
                     'class'     => 'fa-icon-choice',
