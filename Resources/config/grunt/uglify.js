@@ -17,9 +17,9 @@ module.exports = function (grunt, options) {
                 },
                 {
                     expand: true,
-                    cwd: 'src/Ekyna/Bundle/UiBundle/Resources/private',
-                    src: ['js/*.js', 'js/form/*.js'],
-                    dest: 'src/Ekyna/Bundle/UiBundle/Resources/public'
+                    cwd: 'src/Ekyna/Bundle/UiBundle/Resources/private/js',
+                    src: ['*.js', 'form/*.js'],
+                    dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/js'
                 },
                 {
                     expand: true,

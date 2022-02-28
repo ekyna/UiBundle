@@ -39,7 +39,7 @@ define(['jquery', 'ekyna-form'], function($, Form) {
     function collectionUpdatePositions($collection) {
         var selector = '[data-collection="' + $collection.attr('id') + '"]',
             $list = $collection.find('.ekyna-collection-child-container').first().find('> .ekyna-collection-child'),
-            max = $list.size() - 1;
+            max = $list.length - 1;
 
         $list.each(function(index, li) {
             var $li = $(li);

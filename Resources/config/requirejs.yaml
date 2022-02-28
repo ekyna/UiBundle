@@ -11,7 +11,7 @@ config:
         -
             name: jquery-ui
             location: bundles/ekynaui/lib/jquery-ui
-            main: core
+            main: ui/jquery-patch
         -
             name: bootstrap
             location: bundles/ekynaui/lib/bootstrap

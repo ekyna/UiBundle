@@ -1,1 +1,1 @@
-define(["jquery","bootstrap/colorpicker"],function(a){"use strict";return{init:function(b){b.each(function(){var b=a(this).find('input[type="text"]');b.colorpicker(a(this).data("options")),b.on("changeColor",function(a){b.css({backgroundColor:a.color.toHex()})})})}}});
+define(["jquery","bootstrap/colorpicker"],function(n){"use strict";return{init:function(o){o.each(function(){var t=n(this).find('input[type="text"]');t.colorpicker(n(this).data("options")),t.on("changeColor",function(o){t.css({backgroundColor:o.color.toHex()})})})}}});

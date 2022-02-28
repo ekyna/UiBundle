@@ -41,13 +41,6 @@ module.exports = function (grunt, options) {
                     src: 'node_modules/validator/validator.min.js',
                     dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/validator.js'
                 },
-                // Jquery Ui
-                {
-                    expand: true,
-                    cwd: 'node_modules/jquery-ui/ui',
-                    src: ['*.js', 'widgets/*.js', 'effects/*.js'],
-                    dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/tmp/jquery-ui'
-                },
                 {
                     expand: true,
                     cwd: 'node_modules/jquery-ui-themes/themes/smoothness/images',
@@ -166,6 +159,12 @@ module.exports = function (grunt, options) {
                     cwd: 'src/Ekyna/Bundle/UiBundle/Resources/private/lib',
                     src: ['**'],
                     dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib'
+                },
+                {
+                    expand: true,
+                    cwd: 'node_modules/jquery-ui/ui',
+                    src: ['*.js', 'effects/*.js', 'i18n/*.js', 'vendor/*/*.js', 'widgets/*.js'],
+                    dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/tmp/jquery-ui/ui'
                 }
             ]
         },
@@ -173,7 +172,8 @@ module.exports = function (grunt, options) {
             src: 'node_modules/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js',
             dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/bootstrap/dialog.js',
             options: {
-                process: function (content) {
+                process: function (content, srcpath) {
+                    console.log('bootstrap dialog', srcpath);
                     return content.replace('"bootstrap-dialog",', '');
                 }
             }
@@ -181,24 +181,26 @@ module.exports = function (grunt, options) {
         ui_fileupload: {
             src: 'node_modules/blueimp-file-upload/js/jquery.fileupload.js',
             dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/tmp/lib/jquery/fileupload.js', // tmp to minify
-            options: {
+            /*options: {
                 process: function (content) {
                     return content.replace(/jquery-ui\/ui\/widget/g, 'jquery-ui/widget');
                 }
-            }
+            }*/
         },
         ui_contextmenu: {
-            src: 'node_modules/ui-contextmenu/jquery.ui-contextmenu.min.js',
-            dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/jquery-ui/widgets/contextmenu.js',
-            options: {
+            src: 'node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js',
+            dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/jquery-ui/ui/widgets/contextmenu.js',
+            /*src: 'node_modules/ui-contextmenu/jquery.ui-contextmenu.min.js',
+            dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/jquery-ui/ui/widgets/contextmenu.js',*/
+            /*options: {
                 process: function (content, srcpath) {
                     if (/jquery\.ui-contextmenu/.test(srcpath)) {
-                        content = content.replace(/jquery-ui\/menu/g, 'jquery-ui/widgets/menu');
+                        content = content.replace(/jquery-ui\/ui\/widgets/g, 'jquery-ui/widgets');
                     }
 
                     return content;
                 }
-            }
+            }*/
         },
         ui_less: { // For watch:ui_less
             expand: true,

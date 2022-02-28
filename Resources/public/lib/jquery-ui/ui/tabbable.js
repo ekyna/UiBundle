@@ -1,0 +1,1 @@
+!function(e){"use strict";"function"==typeof define&&define.amd?define(["jquery","./version","./focusable"],e):e(jQuery)}(function(u){"use strict";return u.extend(u.expr.pseudos,{tabbable:function(e){var n=u.attr(e,"tabindex"),t=null!=n;return(!t||0<=n)&&u.ui.focusable(e,t)}})});

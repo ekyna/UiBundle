@@ -3,6 +3,11 @@ define(['require', 'jquery', 'aos', 'bootstrap', 'ekyna-clipboard-copy'], functi
     var EkynaUi = function() {};
 
     EkynaUi.prototype.init = function(aos) {
+        // hack to fix jquery 3.6 focus security patch that bugs auto search in select-2
+        // https://forums.select2.org/t/search-being-unfocused/1203/10
+        $(document).on('select2:open', () => {
+            document.querySelector('.select2-search__field').focus();
+        });
 
         AOS.init($.extend({}, aos, {
             offset: 200
@@ -25,7 +30,7 @@ define(['require', 'jquery', 'aos', 'bootstrap', 'ekyna-clipboard-copy'], functi
 
             var $this = $(this), $target = $('#' + $this.data('toggle-details'));
 
-            if (1 === $target.size()) {
+            if (1 === $target.length) {
                 if ($target.is(':visible')) {
                     $target.hide();
                 } else {

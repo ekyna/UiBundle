@@ -1,1 +1,1 @@
-define(["require","exports","backbone","underscore"],function(a,b,c,d){"use strict";return d.extend({},c.Events)});
+define(["require","exports","backbone","underscore"],function(e,n,r,t){"use strict";return t.extend({},r.Events)});

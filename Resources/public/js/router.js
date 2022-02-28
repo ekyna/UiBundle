@@ -1,1 +1,1 @@
-define(["jquery","router","json!routes"],function(a,b,c){return b.setRoutingData(c),b.setLocale(a("html").attr("lang")),b});
+define(["jquery","router","json!routes"],function(t,e,n){return e.setRoutingData(n),e.setLocale(t("html").attr("lang")),e});

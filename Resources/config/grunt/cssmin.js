@@ -16,7 +16,8 @@ module.exports = function (grunt, options) {
                 ],
                 'src/Ekyna/Bundle/UiBundle/Resources/public/css/jquery-ui.css': [
                     'node_modules/jquery-ui-themes/themes/smoothness/jquery-ui.css',
-                    'src/Ekyna/Bundle/UiBundle/Resources/private/css/jquery-ui.css'
+                    'src/Ekyna/Bundle/UiBundle/Resources/private/css/jquery-ui.css',
+                    'node_modules/jquery-contextmenu/dist/jquery.contextMenu.css'
                 ]
             }
         },

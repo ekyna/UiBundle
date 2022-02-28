@@ -1,1 +1,1 @@
-define(["jquery","bootstrap/datetimepicker"],function(a){"use strict";return{init:function(b){b.each(function(){a(this).datetimepicker(a(this).data("options"))})}}});
+define(["jquery","bootstrap/datetimepicker"],function(i){"use strict";return{init:function(t){t.each(function(){i(this).datetimepicker(i(this).data("options"))})}}});

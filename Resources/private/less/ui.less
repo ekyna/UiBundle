@@ -2,8 +2,8 @@
 @loading-spinner-color: #999;
 
 .ui-loading {
-    min-height: @loading-size + 40;
-    min-width: @loading-size + 40;
+    min-height: @loading-size + 40px;
+    min-width: @loading-size + 40px;
 
     .ui-loading-container {
         position: absolute;
@@ -24,8 +24,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            margin-top: -@loading-size/2;
-            margin-left: -@loading-size/2;
+            transform: translate(-50%, -50%);
 
             .circle {
                 width: 100%;
@@ -48,10 +47,12 @@
 
             .generate-circle(@n, @i: 2) when (@i =< @n) {
                 .circle-@{i} {
-                    transform: rotate(360deg / @loading-circle-count * (@i - 1));
+                    @degree: (360deg / @loading-circle-count * (@i - 1));
+                    transform: rotate(@degree);
                 }
                 .circle-@{i}:before {
-                    animation-delay: -@loading-animation-duration + @loading-animation-duration / @loading-circle-count * (@i - 1);
+                    @delay: (-@loading-animation-duration + @loading-animation-duration / @loading-circle-count * (@i - 1));
+                    animation-delay: @delay;
                 }
                 .generate-circle(@n, (@i + 1));
             }
