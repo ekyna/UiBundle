@@ -82,6 +82,8 @@ button:
     map: Carte
     convert: Convertir
 field:
+    field: Champ
+    property: Propriété
     name: Nom
     title: Titre
     subtitle: Sous-Titre
@@ -232,6 +234,9 @@ field:
     columns: Colonnes
     host: Hôte
     event: Évènement
+import:
+    from: À partir de la ligne
+    to: Jusqu'à la ligne
 message:
     fa_icon_cheatsheet: |
         Voir la <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">liste complète des icônes</a>.
