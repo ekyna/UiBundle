@@ -37,20 +37,31 @@ class Select2Extension extends AbstractTypeExtension
             return;
         }
 
-        if ($select2 = $options['select2']) {
-            FormUtil::addClass($view, 'select2');
+        if (false === $select2 = $options['select2']) {
+            return;
+        }
 
-            if (is_array($select2)) {
-                if (!$options['required'] && !isset($select2['allowClear'])) {
-                    $select2['allowClear'] = false;
-                }
+        FormUtil::addClass($view, 'select2');
 
-                foreach ($select2 as $key => $value) {
-                    $view->vars['attr']['data-' . $this->dasherize($key)] = (string)$value;
-                }
-            } elseif (!$options['required']) {
-                $view->vars['attr']['data-allow-clear'] = 1;
-            }
+        if (true === $select2) {
+            $select2 = [];
+        }
+
+        $select2 = array_replace([
+            'allowClear'  => true,
+            'placeholder' => $view->vars['placeholder'] ?? null,
+        ], $select2);
+
+        if ($options['required']) {
+            $select2['allowClear'] = false;
+        }
+
+        if (!$select2['allowClear'] && empty($select2['placeholder'])) {
+            $select2['placeholder'] = 'Choose';
+        }
+
+        foreach ($select2 as $key => $value) {
+            $view->vars['attr']['data-' . $this->dasherize($key)] = (string)$value;
         }
     }
 
