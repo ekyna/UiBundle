@@ -15,6 +15,8 @@ use Symfony\Contracts\Translation\TranslatableInterface;
 use Twig\Environment;
 use Twig\TemplateWrapper;
 
+use function strpos;
+
 /**
  * Class UiRenderer
  * @package Ekyna\Bundle\UiBundle\Service\Ui
@@ -208,7 +210,12 @@ class UiRenderer
 
         $icon = '';
         if (!empty($options['icon'])) {
-            $icon = ($options['fa_icon'] ? 'fa fa-' : 'glyphicon glyphicon-') . $options['icon'];
+            if ($options['fa_icon'] || 0 === strpos($options['icon'], 'fa fa-')) {
+                $prefix = 'fa fa-';
+            } else {
+                $prefix = 'glyphicon glyphicon-';
+            }
+            $icon = $prefix . $options['icon'];
         }
 
         /** @noinspection PhpUnhandledExceptionInspection */

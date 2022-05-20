@@ -13,11 +13,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use function Symfony\Component\Translation\t;
 
 /**
- * Class DateRange
+ * Class DateRangeType
  * @package Ekyna\Bundle\UiBundle\Form\Type
  * @author  Étienne Dauvergne <contact@ekyna.com>
  */
-class DateRange extends AbstractType
+class DateRangeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
