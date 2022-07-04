@@ -11,6 +11,7 @@ use Twig\Extra\Intl\IntlExtension;
 use Twig\TwigFilter;
 
 use function abs;
+use function is_string;
 use function twig_round;
 
 /**
@@ -41,8 +42,7 @@ class DecimalExtension extends AbstractExtension
         ];
     }
 
-    /** @noinspection PhpMissingDocCommentInspection */
-    public function abs($value)
+    public function abs(Decimal|string|float|int $value): Decimal|float|int
     {
         if ($value instanceof Decimal) {
             return $value->abs();
@@ -51,9 +51,11 @@ class DecimalExtension extends AbstractExtension
         return abs($value);
     }
 
-    /** @noinspection PhpMissingDocCommentInspection */
-    public function round($value, $precision = 0, $method = 'common')
-    {
+    public function round(
+        Decimal|string|float|int $value,
+        int                      $precision = 0,
+        string                   $method = 'common'
+    ): Decimal|float|int {
         if (!$value instanceof Decimal) {
             return twig_round($value, $precision, $method);
         }
@@ -69,45 +71,49 @@ class DecimalExtension extends AbstractExtension
         return $value->mul(10 ** $precision)->{$method}()->div(10 ** $precision);
     }
 
-    /**
-     * @param Decimal|string|float|int $amount
-     */
-    public function formatCurrency($amount, string $currency, array $attrs = [], string $locale = null): string
-    {
-        if ($amount instanceof Decimal) {
-            $amount = $amount->toFloat();
-        }
-
-        return $this->intlExtension->formatCurrency($amount, $currency, $attrs, $locale);
-    }
-
-    /**
-     * @param Decimal|string|float|int $number
-     */
-    public function formatNumber(
-        $number,
-        array $attrs = [],
-        string $style = 'decimal',
-        string $type = 'default',
-        string $locale = null
+    public function formatCurrency(
+        Decimal|string|float|int $amount,
+        string                   $currency,
+        array                    $attrs = [],
+        string                   $locale = null
     ): string {
-        if ($number instanceof Decimal) {
-            $number = $number->toFloat();
-        }
-
-        return $this->intlExtension->formatNumber($number, $attrs, $style, $type, $locale);
+        return $this
+            ->intlExtension
+            ->formatCurrency($this->convert($amount), $currency, $attrs, $locale);
     }
 
-    /**
-     * @param Decimal|string|float|int $number
-     */
+    public function formatNumber(
+        Decimal|string|float|int $number,
+        array                    $attrs = [],
+        string                   $style = 'decimal',
+        string                   $type = 'default',
+        string                   $locale = null
+    ): string {
+        return $this
+            ->intlExtension
+            ->formatNumber($this->convert($number), $attrs, $style, $type, $locale);
+    }
+
     public function formatNumberStyle(
         string $style,
-               $number,
-        array  $attrs = [],
+        Decimal|string|float|int $number,
+        array $attrs = [],
         string $type = 'default',
         string $locale = null
     ): string {
         return $this->formatNumber($number, $attrs, $style, $type, $locale);
+    }
+
+    private function convert(Decimal|string|float|int $number): float
+    {
+        if ($number instanceof Decimal) {
+            return $number->toFloat();
+        }
+
+        if (is_string($number)) {
+            return (float)$number;
+        }
+
+        return $number;
     }
 }
