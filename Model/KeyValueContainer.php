@@ -8,59 +8,36 @@ use ArrayAccess;
 
 /**
  * Class KeyValueContainer
- * @package Ekyna\Bundle\CoreBundle\Model
- * @author Bart van den Burg <bart@burgov.nl>
- * @see https://github.com/Burgov/KeyValueFormBundle/blob/master/KeyValueContainer.php
- * @author Étienne Dauvergne <contact@ekyna.com>
+ * @package Ekyna\Bundle\UiBundle\Model
+ * @author  Étienne Dauvergne <contact@ekyna.com>
  */
-class KeyValueContainer implements ArrayAccess
+final class KeyValueContainer implements ArrayAccess
 {
-    private array $data;
-
-    /**
-     * @param array $data
-     */
-    public function __construct(array $data = [])
+    public function __construct(private array $data = [])
     {
-        $this->data = $data;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return $this->data;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return array_key_exists($offset, $this->data);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->data[$offset];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->data[$offset] = $value;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->data[$offset]);
     }

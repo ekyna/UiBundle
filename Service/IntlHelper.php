@@ -120,7 +120,7 @@ class IntlHelper
      */
     public function setTranslatorLocale(string $locale): void
     {
-        array_push($this->localeStack, $this->translator->getLocale());
+        $this->localeStack[] = $this->translator->getLocale();
 
         $this->translator->setLocale(strtolower($locale));
     }

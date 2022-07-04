@@ -13,7 +13,7 @@ use Twig\Environment;
 
 /**
  * Class ModalRenderer
- * @package Ekyna\Bundle\CoreBundle\Modal
+ * @package Ekyna\Bundle\UiBundle\Service\Modal
  * @author  Étienne Dauvergne <contact@ekyna.com>
  */
 class ModalRenderer

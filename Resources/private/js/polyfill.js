@@ -8,7 +8,7 @@ define(['require'], function(require) {
     var defaultLocale = document.documentElement.lang || (navigator.language || navigator.browserLanguage).split('-')[0] || 'en';
 
     // Available locales are en, fr, de, es and pt
-    /** @see src/Ekyna/Bundle/CoreBundle/Resources/config/grunt/copy.js:101 */
+    /** @see src/Ekyna/Bundle/UiBundle/Resources/config/grunt/copy.js:101 */
     if (-1 === ['en', 'fr', 'de', 'es', 'pt'].indexOf(defaultLocale)) {
         defaultLocale = 'en';
     }

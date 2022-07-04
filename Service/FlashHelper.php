@@ -17,20 +17,14 @@ use Symfony\Component\Translation\TranslatableMessage;
  */
 class FlashHelper
 {
-    private RequestStack $requestStack;
-
-
-    public function __construct(RequestStack $requestStack)
+    public function __construct(private readonly RequestStack $requestStack)
     {
-        $this->requestStack = $requestStack;
     }
 
     /**
      * Creates a flash message.
-     *
-     * @param TranslatableMessage|string $message
      */
-    public function addFlash($message, string $type): void
+    public function addFlash(TranslatableMessage|string $message, string $type): void
     {
         if (!$bag = $this->getFlashBag()) {
             return;
@@ -57,8 +51,7 @@ class FlashHelper
     {
         try {
             return $this->requestStack->getSession()->getFlashBag();
-        } catch (SessionNotFoundException $exception) {
-
+        } catch (SessionNotFoundException) {
         }
 
         return null;

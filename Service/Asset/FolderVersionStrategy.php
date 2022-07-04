@@ -11,7 +11,7 @@ use function sprintf;
 
 /**
  * Class FolderVersionStrategy
- * @package Ekyna\Bundle\CoreBundle\Service\Asset
+ * @package Ekyna\Bundle\UiBundle\Service\Asset
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class FolderVersionStrategy implements VersionStrategyInterface

@@ -1,3 +1,4 @@
+// TODO Move to resource bundle
 define(['jquery', 'router', 'json!routes'],
     function ($, Router, routes) {
         Router.setRoutingData(routes);

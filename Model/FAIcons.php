@@ -8,7 +8,7 @@ use Ekyna\Bundle\ResourceBundle\Model\AbstractConstants;
 
 /**
  * Class FAIcons
- * @package Ekyna\Bundle\CoreBundle\Model
+ * @package Ekyna\Bundle\UiBundle\Model
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 final class FAIcons extends AbstractConstants

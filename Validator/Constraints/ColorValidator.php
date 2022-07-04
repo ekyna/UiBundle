@@ -14,7 +14,7 @@ use function substr;
 
 /**
  * Class ColorValidator
- * @package Ekyna\Bundle\CoreBundle\Validator\Constraints
+ * @package Ekyna\Bundle\UiBundle\Validator\Constraints
  * @author  Étienne Dauvergne <contact@ekyna.com>
  */
 class ColorValidator extends ConstraintValidator

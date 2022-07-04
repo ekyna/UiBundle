@@ -21,7 +21,7 @@ use function imagepng;
 
 /**
  * Class CountryFlagsCommand
- * @package Ekyna\Bundle\CoreBundle\Command
+ * @package Ekyna\Bundle\UiBundle\Command
  * @author  Etienne Dauvergne <contact@ekyna.com>
  *
  * @see     https://github.com/madebybowtie/FlagKit

@@ -9,7 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class ModalEvent
- * @package Ekyna\Bundle\CoreBundle\Event
+ * @package Ekyna\Bundle\UiBundle\Event
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class ModalEvent extends Event

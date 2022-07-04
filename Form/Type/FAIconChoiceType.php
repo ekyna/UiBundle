@@ -13,7 +13,7 @@ use function Symfony\Component\Translation\t;
 
 /**
  * Class FAIconChoiceType
- * @package Ekyna\Bundle\CoreBundle\Form\Type
+ * @package Ekyna\Bundle\UiBundle\Form\Type
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class FAIconChoiceType extends AbstractType

@@ -310,7 +310,7 @@ class Modal
         if ($prepend) {
             array_unshift($this->buttons, $options);
         } else {
-            array_push($this->buttons, $options);
+            $this->buttons[] = $options;
         }
 
         return $this;

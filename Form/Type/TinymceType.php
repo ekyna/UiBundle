@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use function array_key_exists;
 use function is_string;
 use function preg_replace;
-use function strlen;
 
 /**
  * Class TinymceType
@@ -23,17 +22,8 @@ use function strlen;
  */
 class TinymceType extends AbstractType
 {
-    private array $themes;
-
-
-    /**
-     * Constructor.
-     *
-     * @param array $themes
-     */
-    public function __construct(array $themes)
+    public function __construct(private readonly array $themes)
     {
-        $this->themes = $themes;
     }
 
     /**
@@ -46,6 +36,10 @@ class TinymceType extends AbstractType
                 return $html;
             },
             function ($html) { // reverse transform
+                if (empty($html)) {
+                    return null;
+                }
+
                 $html = preg_replace('~<p[^>]*>[&nbsp;|\s]*</p>~', '', $html);
                 $html = preg_replace('~[\r\n]+~', '', $html);
 

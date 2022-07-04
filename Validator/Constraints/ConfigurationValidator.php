@@ -11,7 +11,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class ConfigurationValidator
- * @package Ekyna\Bundle\CoreBundle\Validator\Constraints
+ * @package Ekyna\Bundle\UiBundle\Validator\Constraints
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class ConfigurationValidator extends ConstraintValidator

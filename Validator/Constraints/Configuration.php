@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * Class Configuration
- * @package Ekyna\Bundle\CoreBundle\Validator\Constraints
+ * @package Ekyna\Bundle\UiBundle\Validator\Constraints
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class Configuration extends Constraint

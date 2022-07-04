@@ -11,7 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class FaIconsCommand
- * @package Ekyna\Bundle\CoreBundle\Command
+ * @package Ekyna\Bundle\UiBundle\Command
  * @author  Étienne Dauvergne <contact@ekyna.com>
  */
 class FaIconsCommand extends Command
@@ -31,7 +31,7 @@ class FaIconsCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Build the CoreBundle font awesome icons constants class.');
+        $this->setDescription('Build the UiBundle font awesome icons constants class.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -82,13 +82,13 @@ class FaIconsCommand extends Command
         $content = <<<EOT
 <?php
 
-namespace Ekyna\Bundle\CoreBundle\Model;
+namespace Ekyna\Bundle\UiBundle\Model;
 
 use Ekyna\Bundle\ResourceBundle\Model\AbstractConstants;
 
 /**
  * Class FAIcons
- * @package Ekyna\Bundle\CoreBundle\Model
+ * @package Ekyna\Bundle\UiBundle\Model
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 final class FAIcons extends AbstractConstants
@@ -155,7 +155,7 @@ EOT;
             return;
         }
 
-        $path = $this->projectDirectory . '/src/Ekyna/Bundle/CoreBundle/Model/FAIcons.php';
+        $path = $this->projectDirectory . '/src/Ekyna/Bundle/UiBundle/Model/FAIcons.php';
 
         $filesystem = new Filesystem();
 

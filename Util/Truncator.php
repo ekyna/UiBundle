@@ -16,7 +16,7 @@ use const LIBXML_HTML_NOIMPLIED;
 
 /**
  * Class Truncator
- * @package Ekyna\Bundle\CoreBundle\Util
+ * @package Ekyna\Bundle\UiBundle\Util
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class Truncator

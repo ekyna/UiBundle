@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Ekyna\Bundle\UiBundle\Service\Geo;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Intl\Countries;
+use Throwable;
 
 /**
  * Class UserCountryGuesser
@@ -17,30 +18,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class UserCountryGuesser
 {
-    private RequestStack $requestStack;
-    private array $results;
-    private ?Client $client = null;
+    private array   $results = [];
+    private ?Client $client  = null;
 
-
-    /**
-     * Constructor.
-     *
-     * @param RequestStack $requestStack
-     */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(private readonly RequestStack $requestStack)
     {
-        $this->requestStack = $requestStack;
-        $this->results = [];
     }
 
     /**
      * Returns the user country iso code (alpha-2).
-     *
-     * @param string $default
-     *
-     * @return string|null
      */
-    public function getUserCountry(string $default = 'US'): ?string
+    public function getUserCountry(string $default = 'US'): string
     {
         if (null === $request = $this->requestStack->getMainRequest()) {
             return $default;
@@ -62,7 +50,7 @@ class UserCountryGuesser
                 'stream'  => true,
                 'timeout' => 0.3,
             ]);
-        } catch (GuzzleException $e) {
+        } catch (Throwable) {
             return $default;
         }
 
@@ -77,22 +65,13 @@ class UserCountryGuesser
             return $default;
         }
 
-        $code = $result[1];
-        if (in_array($code, ['EU', 'ZZ'], true)) {
+        if (empty($code = $result[1]) || !Countries::exists($code)) {
             $code = $default;
         }
 
         return $this->results[$ip] = $code;
-
-        //list ($index, $iso2, $iso3, $name) = explode(';', $response->getBody()->getContents());
-        //return $iso2;
     }
 
-    /**
-     * Returns the http client.
-     *
-     * @return Client
-     */
     private function getClient(): Client
     {
         if ($this->client) {

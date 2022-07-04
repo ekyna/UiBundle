@@ -11,7 +11,7 @@ use Twig\TwigFunction;
 
 /**
  * Class FormExtension
- * @package Ekyna\Bundle\CoreBundle\Twig
+ * @package Ekyna\Bundle\UiBundle\Twig
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class FormExtension extends AbstractExtension

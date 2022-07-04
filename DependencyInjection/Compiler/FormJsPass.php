@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class FormJsPass
- * @package Ekyna\Bundle\CoreBundle\DependencyInjection\Compiler
+ * @package Ekyna\Bundle\UiBundle\DependencyInjection\Compiler
  * @author Étienne Dauvergne <contact@ekyna.com>
  */
 class FormJsPass implements CompilerPassInterface
