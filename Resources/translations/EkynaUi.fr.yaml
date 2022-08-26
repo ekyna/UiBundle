@@ -145,6 +145,7 @@ field:
     day: Jour
     from_date: Du
     to_date: Au
+    date_range: Du {from} au {to}
     start_date: Date de début
     end_date: Date de fin
     created_at: Date de création

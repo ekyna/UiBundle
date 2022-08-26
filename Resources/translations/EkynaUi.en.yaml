@@ -145,6 +145,7 @@ field:
     day: Day
     from_date: From
     to_date: To
+    date_range: From {from} to {to}
     start_date: Start date
     end_date: End date
     created_at: Created at
