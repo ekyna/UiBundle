@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatableInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class Select2Extension
@@ -18,6 +20,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class Select2Extension extends AbstractTypeExtension
 {
+    public function __construct(private readonly TranslatorInterface $translator)
+    {
+    }
+
     /**
      * @inheritDoc
      */
@@ -54,6 +60,10 @@ class Select2Extension extends AbstractTypeExtension
 
         if ($options['required']) {
             $select2['allowClear'] = false;
+        }
+
+        if (isset($select2['placeholder']) && $select2['placeholder'] instanceof TranslatableInterface) {
+            $select2['placeholder'] = $select2['placeholder']->trans($this->translator);
         }
 
         if (!$select2['allowClear'] && empty($select2['placeholder'])) {

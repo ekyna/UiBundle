@@ -52,6 +52,9 @@ return static function (ContainerConfigurator $container) {
 
         // Select2 extension
         ->set('ekyna_ui.form_extension.select2', Select2Extension::class)
+            ->args([
+                service('translator'),
+            ])
             ->tag('form.type_extension')
 
         // Static control extension

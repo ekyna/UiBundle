@@ -15,7 +15,10 @@ use Symfony\Contracts\Translation\TranslatableInterface;
 use Twig\Environment;
 use Twig\TemplateWrapper;
 
-use function strpos;
+use function array_merge;
+use function explode;
+use function implode;
+use function str_starts_with;
 
 /**
  * Class UiRenderer
@@ -169,13 +172,12 @@ class UiRenderer
 
     /**
      * Renders the button.
-     *
-     * @param TranslatableInterface|UiButton|string $label
-     *
-     * @noinspection PhpDocMissingThrowsInspection
      */
-    public function renderButton($label = '', array $options = [], array $attributes = []): string
-    {
+    public function renderButton(
+        TranslatableInterface|UiButton|string $label = '',
+        array                                 $options = [],
+        array                                 $attributes = []
+    ): string {
         if ($label instanceof UiButton) {
             $options = $label->getOptions();
             $attributes = $label->getAttributes();
@@ -210,7 +212,9 @@ class UiRenderer
 
         $icon = '';
         if (!empty($options['icon'])) {
-            if ($options['fa_icon'] || 0 === strpos($options['icon'], 'fa fa-')) {
+            if (str_starts_with($options['icon'], 'fa fa-')) {
+                $prefix = 'fa fa-';
+            } elseif ($options['fa_icon']) {
                 $prefix = 'fa fa-';
             } else {
                 $prefix = 'glyphicon glyphicon-';
@@ -367,8 +371,6 @@ class UiRenderer
             return $this->assetExtension;
         }
 
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
         return $this->assetExtension = $this->twig->getExtension(AssetExtension::class);
     }
 
@@ -381,8 +383,6 @@ class UiRenderer
             return $this->httpExtension;
         }
 
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
         return $this->httpExtension = $this->twig->getExtension(HttpFoundationExtension::class);
     }
 }
