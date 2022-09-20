@@ -11,14 +11,14 @@ define(
         element.style.boxSizing = 'border-box';
         element.style.resize = 'none';
 
-        var offset = element.offsetHeight - element.clientHeight;
+        const offset = element.offsetHeight - element.clientHeight;
         element.addEventListener('input', function (event) {
             event.target.style.height = 'auto';
             event.target.style.height = event.target.scrollHeight + offset + 'px';
         });
     });
 
-    var EkynaForm = function ($elem, options) {
+    let EkynaForm = function ($elem, options) {
         this.$elem = $($elem);
         this.options = options;
     };
@@ -32,7 +32,7 @@ define(
             //console.log('Form.init()', this.$elem, $parent);
 
             /* Select2 */
-            var select2options = {
+            let select2options = {
                 //selectOnClose: true // For tests
             };
             if ($parent && 1 === $parent.length) {
@@ -40,23 +40,26 @@ define(
             }
             this.$elem.find('select.select2').select2(select2options);
 
-            /* Submit buttons */
-            /*that.$elem.find('button[type="submit"]').on('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                // TODO spin icon
-                that.save();
-            });*/
+            /* Submit */
+            this.$elem.on('submit', (e) => {
+                this.$elem.find('button[type="submit"]').each(function() {
+                    $(this)
+                        .prop('disabled', true)
+                        .addClass('disabled')
+                        .find('.glyphicon,.fa')
+                        .replaceWith($('<i></i>')
+                            .addClass('fa fa-spinner fa-spin'));
+                });
+            });
 
             /* Plugins */
-            var that = this;
-            $.each(plugins, function (selector, paths) {
-                var $target = that.$elem;
+            $.each(plugins, (selector, paths) => {
+                let $target = this.$elem;
                 if (!$target.is(selector)) {
-                    $target = that.$elem.find(selector);
+                    $target = this.$elem.find(selector);
                 }
                 if (0 < $target.length) {
-                    $.each(paths, function(i, path) {
+                    paths.forEach(function(path) {
                         require([path], function (plugin) {
                             //console.log('Form.plugin.init', path, $target);
                             plugin.init($target);
@@ -71,14 +74,13 @@ define(
             /* Destroy select2 */
             this.$elem.find('select.select2').select2('destroy');
 
-            var that = this;
-            $.each(plugins, function (selector, paths) {
-                var $target = that.$elem;
+            $.each(plugins, (selector, paths) => {
+                let $target = this.$elem;
                 if (!$target.is(selector)) {
-                    $target = that.$elem.find(selector);
+                    $target = this.$elem.find(selector);
                 }
                 if (0 < $target.length) {
-                    $.each(paths, function(i, path) {
+                    paths.forEach(function(path) {
                         require([path], function (plugin) {
                             if (plugin.hasOwnProperty('destroy')) {
                                 plugin.destroy($target);
@@ -89,14 +91,13 @@ define(
             });
         },
         save: function() {
-            var that = this;
-            $.each(plugins, function (selector, paths) {
-                var $target = that.$elem;
+            $.each(plugins, (selector, paths) => {
+                let $target = this.$elem;
                 if (!$target.is(selector)) {
-                    $target = that.$elem.find(selector);
+                    $target = this.$elem.find(selector);
                 }
                 if (0 < $target.length) {
-                    $.each(paths, function(i, path) {
+                    paths.forEach(function(path) {
                         require([path], function (plugin) {
                             if (plugin.hasOwnProperty('save')) {
                                 plugin.save($target);
@@ -114,7 +115,7 @@ define(
      * @see http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/?redirect_from_locale=fr#toc-checkValidity
      */
     $(".form-with-tabs input, .form-with-tabs textarea, .form-with-tabs select").on('invalid', function(event) {
-        var $tabs = $(event.target).eq(0).parents('.tab-pane');
+        let $tabs = $(event.target).eq(0).parents('.tab-pane');
         if ($tabs.length) {
             showTabs($tabs);
             return;
@@ -122,14 +123,14 @@ define(
         event.preventDefault();
     });
 
-    var $errorFields = $('form .has-error');
+    const $errorFields = $('form .has-error');
     if ($errorFields.length) {
         showTabs($errorFields.eq(0).parents('.tab-pane'));
     }
 
     function showTabs($tabs) {
         $tabs.each(function() {
-            var $a = $('a[href="#' + $(this).attr('id') + '"]');
+            const $a = $('a[href="#' + $(this).attr('id') + '"]');
             if ($a.length === 1) {
                 $a.tab('show');
             }

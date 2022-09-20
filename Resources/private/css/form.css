@@ -62,7 +62,7 @@ div.checkbox > label.required:after {
     margin: 0 -15px 0 -15px;
 }
 
-.form-footer .glyphicon {
+.form-footer .glyphicon, .form-footer .fa {
     margin-right: 5px;
 }
 

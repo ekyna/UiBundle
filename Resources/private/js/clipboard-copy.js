@@ -7,28 +7,25 @@ define(['jquery', 'bootstrap'], function ($) {
         e.preventDefault();
         e.stopPropagation();
 
-        var element = e.currentTarget;
-        element.addEventListener('copy', function (event) {
-            event.preventDefault();
-            if (event.clipboardData) {
-                event.clipboardData.setData("text/plain", $(element).data('clipboard-copy'));
+        let element = e.currentTarget,
+            $element = $(element);
 
-                $(element)
-                    .tooltip({
-                        title: 'Copied to clipboard',
-                        placement: 'auto',
-                        trigger: 'manual',
-                        container: 'body'
-                    })
-                    .tooltip('show');
+        navigator.clipboard.writeText($element.data('clipboard-copy')).then(() => {
+            $element
+                .tooltip({
+                    title: 'Copied to clipboard',
+                    placement: 'auto',
+                    trigger: 'manual',
+                    container: 'body'
+                })
+                .tooltip('show');
 
-                setTimeout(function () {
-                    $(element).tooltip('hide');
-                }, 1500);
-            }
+            setTimeout(function () {
+                $element.tooltip('hide');
+            }, 1500);
+        }, () => {
+            /* clipboard write failed */
         });
-
-        document.execCommand("Copy");
 
         return false;
     });
