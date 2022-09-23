@@ -41,7 +41,13 @@ define(
             this.$elem.find('select.select2').select2(select2options);
 
             /* Submit */
-            this.$elem.on('submit', (e) => {
+            /* TODO (conflicts with payment-forms.js)
+            this.$elem.once('submit', () => {
+                this.$elem.on('submit', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                });
                 this.$elem.find('button[type="submit"]').each(function() {
                     $(this)
                         .prop('disabled', true)
@@ -50,7 +56,7 @@ define(
                         .replaceWith($('<i></i>')
                             .addClass('fa fa-spinner fa-spin'));
                 });
-            });
+            });*/
 
             /* Plugins */
             $.each(plugins, (selector, paths) => {
