@@ -218,6 +218,7 @@ field:
     mobile: Mobile
     general: General
     information: Information
+    data: Data
     coordinates: Coordinates
     config: Configuration
     style: Style
