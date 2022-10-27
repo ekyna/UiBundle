@@ -11,6 +11,7 @@ use Ekyna\Bundle\UiBundle\Form\Extension\FormTypeRedirectExtension;
 use Ekyna\Bundle\UiBundle\Form\Extension\InputGroupButtonExtension;
 use Ekyna\Bundle\UiBundle\Form\Extension\Select2Extension;
 use Ekyna\Bundle\UiBundle\Form\Extension\StaticControlExtension;
+use Ekyna\Bundle\UiBundle\Form\Type\AnniversaryType;
 use Ekyna\Bundle\UiBundle\Form\Type\CollectionType;
 use Ekyna\Bundle\UiBundle\Form\Type\ColorPickerType;
 use Ekyna\Bundle\UiBundle\Form\Type\FAIconChoiceType;
@@ -62,6 +63,13 @@ return static function (ContainerConfigurator $container) {
             ->tag('form.type_extension')
 
         // -------------- Types --------------
+
+        // Anniversary type
+        ->set('ekyna_ui.form_type.anniversary', AnniversaryType::class)
+            ->args([
+                service('ekyna_resource.provider.locale'),
+            ])
+            ->tag('form.type')
 
         // Collection type
         ->set('ekyna_ui.form_type.collection', CollectionType::class)

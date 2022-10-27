@@ -333,6 +333,19 @@
 {% endapply %}
 {%- endblock ekyna_ui_date_range_widget -%}
 
+{%- block ekyna_ui_anniversary_widget -%}
+{% apply spaceless %}
+    <div style="display:inline-block;width:50%">
+        {{- form_widget(form.month) -}}
+        {{- form_errors(form.month) -}}
+    </div>
+    <div style="display:inline-block;width:50%">
+        {{- form_widget(form.day) -}}
+        {{- form_errors(form.day) -}}
+    </div>
+{% endapply %}
+{%- endblock ekyna_ui_anniversary_widget -%}
+
 {%- block ekyna_phone_number_widget -%}
 {% apply spaceless %}
     {%- set sizing = sizing|default(bootstrap_get_sizing()) -%}
