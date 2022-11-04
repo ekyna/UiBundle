@@ -63,11 +63,6 @@ class UiExtension extends AbstractExtension
                 ['is_safe' => ['html']]
             ),
             new TwigFunction(
-                'ui_fa_icon',
-                [UiRenderer::class, 'renderFaIcon'],
-                ['is_safe' => ['html']]
-            ),
-            new TwigFunction(
                 'trans_set_locale',
                 [IntlHelper::class, 'setTranslatorLocale']
             ),
@@ -96,6 +91,11 @@ class UiExtension extends AbstractExtension
             new TwigFilter(
                 'currency_symbol',
                 [IntlHelper::class, 'getCurrencySymbol']
+            ),
+            new TwigFilter(
+                'ui_clipboard_copy',
+                [UiRenderer::class, 'renderClipboardCopy'],
+                ['is_safe' => ['html']]
             ),
             new TwigFilter(
                 'ui_fa_icon',

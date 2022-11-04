@@ -363,6 +363,23 @@ class UiRenderer
     }
 
     /**
+     * Wraps the given value into a clickable clipboard copy element.
+     *
+     * @noinspection PhpUnused
+     */
+    public function renderClipboardCopy(?string $value, array $options = []): string
+    {
+        if (empty($value)) {
+            return '';
+        }
+
+        $tag = $options['tag'] ?? 'span';
+        $label = $options['label'] ?? $value;
+
+        return sprintf('<%s data-clipboard-copy="%s">%s</%s>', $tag, $value, $label, $tag);
+    }
+
+    /**
      * Returns the asset twig extension.
      */
     private function getAssetExtension(): AssetExtension
