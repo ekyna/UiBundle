@@ -151,6 +151,7 @@ field:
     created_at: Date de création
     updated_at: Date de modification
     published_at: Date de publication
+    valid_until: Valide jusqu'au
     expires_at: Date d'expiration
     started_at: Démarré le
     completed_at: Complété le
