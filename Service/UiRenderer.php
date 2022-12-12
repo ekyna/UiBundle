@@ -213,7 +213,9 @@ class UiRenderer
         $icon = '';
         if (!empty($options['icon'])) {
             if (str_starts_with($options['icon'], 'fa fa-')) {
-                $prefix = 'fa fa-';
+                $prefix = '';
+            } elseif (str_starts_with($options['icon'], 'glyphicon glyphicon-')) {
+                $prefix = '';
             } elseif ($options['fa_icon']) {
                 $prefix = 'fa fa-';
             } else {

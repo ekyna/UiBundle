@@ -162,6 +162,7 @@ field:
     validated: Validé
     locked: Vérrouillé
     expired: Expiré
+    hidden: Masqué
     duration: Durée
     feed: Flux
     format: Format

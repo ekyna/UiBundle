@@ -162,6 +162,7 @@ field:
     validated: Validated
     locked: Locked
     expired: Expired
+    hidden: Hidden
     duration: Duration
     feed: Feed
     format: Format
