@@ -11,7 +11,6 @@ use Symfony\Component\Intl\Currencies;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function array_pop;
-use function array_push;
 use function strtolower;
 
 /**
