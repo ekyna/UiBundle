@@ -144,7 +144,7 @@ class ConfigurationType extends AbstractType
         ];
 
         if (null !== $default = $node->getDefaultValue()) {
-            $options['prefered_choice'] = $default;
+            $options['preferred_choices'] = [$default];
         }
 
         $builder->add($node->getName(), Type\ChoiceType::class, $options);
