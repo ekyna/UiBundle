@@ -27,6 +27,7 @@ button:
     complete: Compléter
     confirm: Confirmer
     generate: Générer
+    print: Imprimer
     display: Afficher
     play: Démarrer
     pause: Pause
@@ -155,6 +156,7 @@ field:
     expires_at: Date d'expiration
     started_at: Démarré le
     completed_at: Complété le
+    notified_at: Notifié le
     private: Privé
     enabled: Actif
     disabled: Inactif
