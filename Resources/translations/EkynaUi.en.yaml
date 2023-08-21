@@ -240,6 +240,9 @@ field:
     columns: Columns
     host: Host
     event: Event
+email:
+    from: From
+    reply_to: Reply to
 import:
     from: From line
     to: To line
