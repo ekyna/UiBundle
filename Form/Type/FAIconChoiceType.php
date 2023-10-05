@@ -27,9 +27,10 @@ class FAIconChoiceType extends AbstractType
                 'admin_helper' => 'CMS_TAG_ICON',
                 'placeholder'  => t('value.choose', [], 'EkynaUi'),
                 'select2'      => false,
+                'help'         => t('message.fa_icon_cheatsheet', [], 'EkynaUi'),
+                'help_html'    => true,
                 'attr'         => [
-                    'class'     => 'fa-icon-choice',
-                    'help_text' => t('message.fa_icon_cheatsheet', [], 'EkynaUi'),
+                    'class' => 'fa-icon-choice',
                 ],
             ]);
     }

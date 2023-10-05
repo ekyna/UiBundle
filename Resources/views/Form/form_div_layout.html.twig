@@ -904,12 +904,12 @@
 {% block form_help %}
 {% apply spaceless %}
     {%- if attr.help_text is defined and attr.help_text is not empty -%}
-    {%- set help_text = attr.help_text -%}
+        {%- set help = attr.help_text -%}
     {%- endif -%}
-    {%- set help_text = help_text|default('') -%}
-    {%- if help_text is not empty -%}
-        <span class="help-block">{{ help_text|trans({}, translation_domain)|raw }}</span>
+    {%- if help is not empty -%}
+    {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' help-block')|trim}) -%}
     {%- endif -%}
+    {{ parent() }}
 {% endapply %}
 {% endblock form_help %}
 
