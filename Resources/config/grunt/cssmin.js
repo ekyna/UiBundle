@@ -5,6 +5,9 @@ module.exports = function (grunt, options) {
                 'src/Ekyna/Bundle/UiBundle/Resources/public/css/glyphicons.css': [
                     'src/Ekyna/Bundle/UiBundle/Resources/public/tmp/glyphicons.css'
                 ],
+                'src/Ekyna/Bundle/UiBundle/Resources/public/css/material.css': [
+                    'src/Ekyna/Bundle/UiBundle/Resources/public/tmp/material.css'
+                ],
                 'src/Ekyna/Bundle/UiBundle/Resources/public/css/bootstrap.css': [
                     'src/Ekyna/Bundle/UiBundle/Resources/public/tmp/bootstrap.css'
                 ],
