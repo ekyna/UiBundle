@@ -7,7 +7,7 @@
 
 {% block title %}
 {% if modal.title %}
-    <title><![CDATA[{{ modal.title|trans({}, modal.domain)|raw }}]]></title>
+    <title><![CDATA[{{ modal.title|raw }}]]></title>
 {% endif %}
 {% endblock title %}
 

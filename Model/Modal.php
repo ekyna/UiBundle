@@ -10,9 +10,9 @@ use InvalidArgumentException;
 use LogicException;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatableInterface;
 
 use function array_filter;
-use function array_push;
 use function array_replace;
 use function array_unshift;
 use function explode;
@@ -90,18 +90,18 @@ class Modal
 
     protected static ?OptionsResolver $buttonOptionsResolver = null;
 
-    protected string  $type      = self::TYPE_DEFAULT;
-    protected string  $size      = self::SIZE_WIDE;
-    protected bool    $condensed = false;
-    protected ?string $cssClass  = null;
-    protected ?string $title     = null;
-    protected ?string $domain    = null;
-    protected         $content   = null;
-    protected array   $vars      = [];
-    protected string  $contentType;
-    protected array   $buttons   = [];
+    protected string                               $type      = self::TYPE_DEFAULT;
+    protected string                               $size      = self::SIZE_WIDE;
+    protected bool                                 $condensed = false;
+    protected ?string                              $cssClass  = null;
+    protected TranslatableInterface|string|null    $title     = null;
+    protected ?string                              $domain    = null;
+    protected string|array|null|TableView|FormView $content   = null;
+    protected array                                $vars      = [];
+    protected string                               $contentType;
+    protected array                                $buttons   = [];
 
-    public function __construct(string $title = null)
+    public function __construct(TranslatableInterface|string|null $title = null)
     {
         $this->setTitle($title);
 
@@ -142,14 +142,14 @@ class Modal
         return $this;
     }
 
-    public function setTitle(?string $title): Modal
+    public function setTitle(TranslatableInterface|string|null $title): Modal
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): TranslatableInterface|string|null
     {
         return $this->title;
     }
@@ -184,7 +184,9 @@ class Modal
         } elseif (is_string($content)) {
             $this->setHtml($content);
         } else {
-            throw new InvalidArgumentException('Expected content as FormView, TableView, array (data) or string (html).');
+            throw new InvalidArgumentException(
+                'Expected content as FormView, TableView, array (data) or string (html).'
+            );
         }
 
         return $this;

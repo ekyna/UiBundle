@@ -8,6 +8,7 @@ use Ekyna\Bundle\UiBundle\Event\ModalEvent;
 use Ekyna\Bundle\UiBundle\Model\Modal;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
@@ -33,10 +34,10 @@ class ModalRenderer
      * @param array                    $config
      */
     public function __construct(
-        Environment $twig,
-        TranslatorInterface $translator,
+        Environment              $twig,
+        TranslatorInterface      $translator,
         EventDispatcherInterface $dispatcher,
-        array $config
+        array                    $config
     ) {
         $this->twig = $twig;
         $this->translator = $translator;
@@ -60,7 +61,12 @@ class ModalRenderer
     public function render(Modal $modal, string $template = null): Response
     {
         // Translations
-        $modal->setTitle($this->translator->trans($modal->getTitle()));
+        $title = $modal->getTitle();
+        if ($title instanceof TranslatableInterface) {
+            $modal->setTitle($title->trans($this->translator));
+        } elseif (!empty($title)) {
+            $modal->setTitle($this->translator->trans($title, [], $modal->getDomain()));
+        }
         $buttons = $modal->getButtons();
         foreach ($buttons as &$button) {
             $button['label'] = $this->translator->trans($button['label'], [], $button['trans_domain']);
@@ -82,8 +88,7 @@ class ModalRenderer
 
         $response->headers->set(
             'Content-Type',
-            'application/xml; charset=' . strtolower($this->config['charset']),
-            true
+            'application/xml; charset=' . strtolower($this->config['charset'])
         );
 
         return $response;
