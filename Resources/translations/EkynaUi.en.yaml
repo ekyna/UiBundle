@@ -157,6 +157,7 @@ field:
     started_at: Started at
     completed_at: Completed at
     notified_at: Notified at
+    closed_at: Closed at
     private: Private
     enabled: Enabled
     disabled: Disabled

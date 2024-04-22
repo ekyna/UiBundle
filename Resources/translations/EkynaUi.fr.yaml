@@ -157,6 +157,7 @@ field:
     started_at: Démarré le
     completed_at: Complété le
     notified_at: Notifié le
+    closed_at: Fermé le
     private: Privé
     enabled: Actif
     disabled: Inactif
@@ -186,8 +187,8 @@ field:
     canonical_url: Url canonique
     index: Indexer
     route: Route
-    tag: Tag
-    tags: Tags
+    tag: Étiquette
+    tags: Étiquettes
     parameters: Paramètres
     attributes: Attributs
     key: Clé
