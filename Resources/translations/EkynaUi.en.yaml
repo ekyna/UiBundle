@@ -231,8 +231,9 @@ field:
     animation: Animation
     search: Search
     visible: Visible
-    height: Height
+    length: Length
     width: Width
+    height: Height
     depth: Depth
     total: Total
     barcode: Barcode
