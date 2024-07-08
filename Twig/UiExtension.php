@@ -102,6 +102,15 @@ class UiExtension extends AbstractExtension
                 [UiRenderer::class, 'renderFaIcon'],
                 ['is_safe' => ['html']]
             ),
+            new TwigFilter(
+                'boolean_label',
+                [UiRenderer::class, 'renderBooleanLabel']
+            ),
+            new TwigFilter(
+                'boolean_badge',
+                [UiRenderer::class, 'renderBooleanBadge'],
+                ['is_safe' => ['html']]
+            ),
         ];
     }
 

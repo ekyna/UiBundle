@@ -10,15 +10,20 @@ use Ekyna\Component\Resource\Exception\UnexpectedTypeException;
 use InvalidArgumentException;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Bridge\Twig\Extension\HttpFoundationExtension;
+use Symfony\Bridge\Twig\Extension\TranslationExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatableInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 use Twig\TemplateWrapper;
 
 use function array_merge;
+use function array_replace_recursive;
 use function explode;
 use function implode;
+use function sprintf;
 use function str_starts_with;
+use function Symfony\Component\Translation\t;
 
 /**
  * Class UiRenderer
@@ -27,9 +32,28 @@ use function str_starts_with;
  */
 class UiRenderer
 {
+    private const BOOLEAN_DEFAULTS = [
+        'true'  => [
+            'label'  => 'value.yes',
+            'domain' => 'EkynaUi',
+            'class'  => 'success',
+        ],
+        'false' => [
+            'label'  => 'value.no',
+            'domain' => 'EkynaUi',
+            'class'  => 'danger',
+        ],
+        'null'  => [
+            'label'  => 'value.unknown',
+            'domain' => 'EkynaUi',
+            'class'  => 'default',
+        ],
+    ];
+
     private Environment $twig;
     private array       $config;
 
+    private ?TranslatorInterface     $translator              = null;
     private ?AssetExtension          $assetExtension          = null;
     private ?HttpFoundationExtension $httpExtension           = null;
     private ?TemplateWrapper         $template                = null;
@@ -142,6 +166,44 @@ class UiRenderer
                 'attr'          => $attributes,
             ]
         );
+    }
+
+    public function renderBooleanLabel(?bool $value, array $options = []): string
+    {
+        $options = array_replace_recursive(self::BOOLEAN_DEFAULTS, $options);
+
+        return $this->booleanLabel($value, $options);
+    }
+
+    public function renderBooleanBadge(?bool $value, array $options = []): string
+    {
+        $options = array_replace_recursive(self::BOOLEAN_DEFAULTS, $options);
+
+        $key = $this->booleanKey($value);
+
+        return sprintf(
+            '<span class="label label-%s">%s</span>',
+            $options[$key]['class'],
+            $this->booleanLabel($value, $options)
+        );
+    }
+
+    private function booleanLabel(?bool $value, array $options): string
+    {
+        $key = $this->booleanKey($value);
+
+        return t($options[$key]['label'], [], $options[$key]['domain'])->trans(
+            $this->getTranslator()
+        );
+    }
+
+    private function booleanKey(?bool $value): string
+    {
+        return match ($value) {
+            true  => 'true',
+            false => 'false',
+            null  => 'null',
+        };
     }
 
     /**
@@ -379,6 +441,21 @@ class UiRenderer
         $label = $options['label'] ?? $value;
 
         return sprintf('<%s data-clipboard-copy="%s">%s</%s>', $tag, $value, $label, $tag);
+    }
+
+    /**
+     * Returns the asset twig extension.
+     */
+    private function getTranslator(): TranslatorInterface
+    {
+        if ($this->translator) {
+            return $this->translator;
+        }
+
+        return $this->translator = $this
+            ->twig
+            ->getExtension(TranslationExtension::class)
+            ->getTranslator();
     }
 
     /**
