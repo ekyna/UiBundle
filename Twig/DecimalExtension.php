@@ -42,7 +42,7 @@ class DecimalExtension extends AbstractExtension
         ];
     }
 
-    public function abs(Decimal|string|float|int $value): Decimal|float|int
+    public function abs(Decimal|string|float|int|null $value): Decimal|float|int
     {
         if ($value instanceof Decimal) {
             return $value->abs();
@@ -52,9 +52,9 @@ class DecimalExtension extends AbstractExtension
     }
 
     public function round(
-        Decimal|string|float|int $value,
-        int                      $precision = 0,
-        string                   $method = 'common'
+        Decimal|string|float|int|null $value,
+        int                           $precision = 0,
+        string                        $method = 'common'
     ): Decimal|float|int {
         if (!$value instanceof Decimal) {
             return twig_round($value, $precision, $method);
@@ -72,10 +72,10 @@ class DecimalExtension extends AbstractExtension
     }
 
     public function formatCurrency(
-        Decimal|string|float|int $amount,
-        string                   $currency,
-        array                    $attrs = [],
-        string                   $locale = null
+        Decimal|string|float|int|null $amount,
+        string                        $currency,
+        array                         $attrs = [],
+        string                        $locale = null
     ): string {
         return $this
             ->intlExtension
@@ -83,11 +83,11 @@ class DecimalExtension extends AbstractExtension
     }
 
     public function formatNumber(
-        Decimal|string|float|int $number,
-        array                    $attrs = [],
-        string                   $style = 'decimal',
-        string                   $type = 'default',
-        string                   $locale = null
+        Decimal|string|float|int|null $number,
+        array                         $attrs = [],
+        string                        $style = 'decimal',
+        string                        $type = 'default',
+        string                        $locale = null
     ): string {
         return $this
             ->intlExtension
@@ -95,16 +95,16 @@ class DecimalExtension extends AbstractExtension
     }
 
     public function formatNumberStyle(
-        string $style,
-        Decimal|string|float|int $number,
-        array $attrs = [],
-        string $type = 'default',
-        string $locale = null
+        string                        $style,
+        Decimal|string|float|int|null $number,
+        array                         $attrs = [],
+        string                        $type = 'default',
+        string                        $locale = null
     ): string {
         return $this->formatNumber($number, $attrs, $style, $type, $locale);
     }
 
-    private function convert(Decimal|string|float|int $number): float
+    private function convert(Decimal|string|float|int|null $number): float
     {
         if ($number instanceof Decimal) {
             return $number->toFloat();
