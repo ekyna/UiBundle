@@ -104,7 +104,7 @@ class DecimalExtension extends AbstractExtension
         return $this->formatNumber($number, $attrs, $style, $type, $locale);
     }
 
-    private function convert(Decimal|string|float|int|null $number): float
+    private function convert(Decimal|string|float|int|null $number): float|null
     {
         if ($number instanceof Decimal) {
             return $number->toFloat();
