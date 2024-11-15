@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ekyna\Bundle\UiBundle\Service;
 
-use Ekyna\Bundle\UiBundle\Model\FAIcons;
 use Ekyna\Bundle\UiBundle\Model\UiButton;
 use Ekyna\Component\Resource\Exception\UnexpectedTypeException;
 use InvalidArgumentException;
@@ -410,37 +409,6 @@ class UiRenderer
         }
 
         return $this->dropdownOptionsResolver;
-    }
-
-    /**
-     * Renders a font awesome icon.
-     *
-     * @noinspection PhpUnused
-     */
-    public function renderFaIcon(string $icon = null, string $classes = null): ?string
-    {
-        if (is_null($icon) || !FAIcons::isValid($icon, false)) {
-            return null;
-        }
-
-        return sprintf('<i class="fa fa-%s %s"></i>', $icon, $classes);
-    }
-
-    /**
-     * Wraps the given value into a clickable clipboard copy element.
-     *
-     * @noinspection PhpUnused
-     */
-    public function renderClipboardCopy(?string $value, array $options = []): string
-    {
-        if (empty($value)) {
-            return '';
-        }
-
-        $tag = $options['tag'] ?? 'span';
-        $label = $options['label'] ?? $value;
-
-        return sprintf('<%s data-clipboard-copy="%s">%s</%s>', $tag, $value, $label, $tag);
     }
 
     /**

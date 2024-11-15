@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ekyna\Bundle\UiBundle\Twig;
 
 use Ekyna\Bundle\UiBundle\Service\IntlHelper;
+use Ekyna\Bundle\UiBundle\Service\UiHelper;
 use Ekyna\Bundle\UiBundle\Service\UiRenderer;
 use Symfony\Component\Form\FormView;
 use Twig\Extension\AbstractExtension;
@@ -93,22 +94,22 @@ class UiExtension extends AbstractExtension
                 [IntlHelper::class, 'getCurrencySymbol']
             ),
             new TwigFilter(
-                'ui_clipboard_copy',
-                [UiRenderer::class, 'renderClipboardCopy'],
-                ['is_safe' => ['html']]
-            ),
-            new TwigFilter(
-                'ui_fa_icon',
-                [UiRenderer::class, 'renderFaIcon'],
-                ['is_safe' => ['html']]
-            ),
-            new TwigFilter(
                 'boolean_label',
                 [UiRenderer::class, 'renderBooleanLabel']
             ),
             new TwigFilter(
                 'boolean_badge',
                 [UiRenderer::class, 'renderBooleanBadge'],
+                ['is_safe' => ['html']]
+            ),
+            new TwigFilter(
+                'ui_clipboard_copy',
+                [UiHelper::class, 'renderClipboardCopy'],
+                ['is_safe' => ['html']]
+            ),
+            new TwigFilter(
+                'ui_fa_icon',
+                [UiHelper::class, 'renderFaIcon'],
                 ['is_safe' => ['html']]
             ),
         ];
