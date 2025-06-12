@@ -100,9 +100,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('ekyna_ui.helper.intl', IntlHelper::class)
         ->args([
-            service('request_stack'),
             service('translator'),
-            param('kernel.default_locale'),
         ])
         ->tag('twig.runtime');
 

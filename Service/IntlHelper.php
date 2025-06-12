@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ekyna\Bundle\UiBundle\Service;
 
 use Locale;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Currencies;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -20,26 +19,10 @@ use function strtolower;
  */
 class IntlHelper
 {
-    private RequestStack        $requestStack;
-    private TranslatorInterface $translator;
-    private string              $defaultLocale;
-
-    private ?string $currentLocale = null;
     private array   $localeStack   = [];
 
-
-    /**
-     * Constructor.
-     *
-     * @param RequestStack        $requestStack
-     * @param TranslatorInterface $translator
-     * @param string              $defaultLocale
-     */
-    public function __construct(RequestStack $requestStack, TranslatorInterface $translator, string $defaultLocale)
+    public function __construct(private readonly TranslatorInterface $translator)
     {
-        $this->requestStack = $requestStack;
-        $this->translator = $translator;
-        $this->defaultLocale = $defaultLocale;
     }
 
     /**
@@ -52,25 +35,7 @@ class IntlHelper
      */
     public function getLanguage(string $locale, string $displayLocale = null): string
     {
-        return Locale::getDisplayLanguage($locale, $displayLocale ?? $this->getCurrentLocale());
-    }
-
-    /**
-     * Returns the current locale.
-     *
-     * @return string
-     */
-    private function getCurrentLocale(): string
-    {
-        if ($this->currentLocale) {
-            return $this->currentLocale;
-        }
-
-        if ($request = $this->requestStack->getMainRequest()) {
-            return $this->currentLocale = $request->getLocale();
-        }
-
-        return $this->currentLocale = $this->defaultLocale;
+        return Locale::getDisplayLanguage($locale, $displayLocale ?? $this->translator->getLocale());
     }
 
     /**
@@ -83,7 +48,7 @@ class IntlHelper
      */
     public function getCountry(string $code, string $displayLocale = null): string
     {
-        return Countries::getName($code, $displayLocale ?? $this->getCurrentLocale());
+        return Countries::getName($code, $displayLocale ?? $this->translator->getLocale());
     }
 
     /**
@@ -96,7 +61,7 @@ class IntlHelper
      */
     public function getCurrencyName(string $code, string $displayLocale = null): string
     {
-        return Currencies::getName($code, $displayLocale ?? $this->getCurrentLocale());
+        return Currencies::getName($code, $displayLocale ?? $this->translator->getLocale());
     }
 
     /**
@@ -109,7 +74,7 @@ class IntlHelper
      */
     public function getCurrencySymbol(string $code, string $displayLocale = null): string
     {
-        return Currencies::getSymbol($code, $displayLocale ?? $this->getCurrentLocale());
+        return Currencies::getSymbol($code, $displayLocale ?? $this->translator->getLocale());
     }
 
     /**

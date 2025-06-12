@@ -27,6 +27,7 @@ button:
     complete: Complete
     confirm: Confirm
     generate: Generate
+    set: Set
     print: Print
     display: Display
     play: Play
