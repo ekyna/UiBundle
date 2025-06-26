@@ -173,6 +173,7 @@ field:
     charset: Charset
     document: Document
     file: File
+    files: Files
     rename: Rename
     choose_file: Choose a file
     unlink: Remove file association
