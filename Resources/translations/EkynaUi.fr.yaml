@@ -70,6 +70,7 @@ button:
     save: Enregistrer
     search: Rechercher
     save_and_list: Enregistrer <small>et retour à la liste</small>
+    schedule: Planifier
     execute: Exécuter
     apply: Appliquer
     recalculate: Recalculer
@@ -128,6 +129,7 @@ field:
     recipients: Destinataires
     reference: Référence
     number: Numéro
+    version: Version
     content: Contenu
     translations: Traductions
     summary: Résumé
@@ -244,6 +246,15 @@ field:
     columns: Colonnes
     host: Hôte
     event: Évènement
+state:
+    new: Nouveau
+    scheduled: Planifié
+    started: Démarrée
+    done: Terminée
+    draft: Brouillon
+    validated: Validé
+    archived: Archivé
+    canceled: Annulé
 email:
     from: Expéditeur
     reply_to: Répondre à
@@ -254,6 +265,7 @@ message:
     fa_icon_cheatsheet: |
         Voir la <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">liste complète des icônes</a>.
     remove_confirm: Êtes-vous sûr de vouloir supprimer cet élément ?
+    duplicate_confirm: Êtes-vous sûr de vouloir dupliquer cet élément ?
     action_confirm: Confirmer l'action
     no_translations: Aucune traduction configurée
 changefreq:

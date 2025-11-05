@@ -26,6 +26,7 @@ class ConfirmType extends AbstractType
             'label'       => $options['message'],
             'attr'        => ['align_with_widget' => true],
             'required'    => true,
+            'mapped'      => false,
             'constraints' => [
                 new Constraints\IsTrue(),
             ],

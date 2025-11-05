@@ -139,12 +139,25 @@ module.exports = function (grunt, options) {
                     dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/tinymce'
                 },
                 {
+                    expand: true,
+                    cwd: 'node_modules/dhtmlx-gantt/codebase',
+                    src: [
+                        'dhtmlxgantt.css',
+                        'dhtmlxgantt.js'
+                    ],
+                    dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/dhtmlx-gantt'
+                },
+                {
                     src: 'node_modules/aos/dist/aos.css',
                     dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/css/aos.css'
                 },
                 {
                     src: 'node_modules/aos/dist/aos.js',
                     dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/aos.js'
+                },
+                {
+                    src: 'node_modules/chart.js/dist/Chart.min.js',
+                    dest: 'src/Ekyna/Bundle/UiBundle/Resources/public/lib/chart.js'
                 },
                 {
                     src: 'node_modules/chart.js/dist/Chart.min.js',

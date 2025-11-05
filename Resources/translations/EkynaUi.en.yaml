@@ -70,6 +70,7 @@ button:
     save: Save
     search: Search
     save_and_list: Save <small>and back to the list</small>
+    schedule: Schedule
     execute: Execute
     apply: Apply
     recalculate: Recalculate
@@ -128,6 +129,7 @@ field:
     recipients: Recipients
     reference: Reference
     number: Number
+    version: Version
     content: Content
     translations: Translations
     summary: Summary
@@ -244,6 +246,15 @@ field:
     columns: Columns
     host: Host
     event: Event
+state:
+    new: New
+    scheduled: Scheduled
+    started: Started
+    done: Done
+    draft: Draft
+    validated: Validated
+    archived: Archived
+    canceled: Canceled
 email:
     from: From
     reply_to: Reply to
@@ -254,6 +265,7 @@ message:
     fa_icon_cheatsheet: |
         See the <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">complete icons list</a>.
     remove_confirm: Are you sure you want to delete this item ?
+    duplicate_confirm: Are you sure you want to duplicate this item ?
     action_confirm: Confirm action ?
     no_translations: No translation configured
 changefreq:

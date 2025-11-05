@@ -74,6 +74,7 @@ config:
         select2: bundles/ekynaui/lib/select2
         aos: bundles/ekynaui/lib/aos
         chart: bundles/ekynaui/lib/chart
+        dhtmlx-gantt: bundles/ekynaui/lib/dhtmlx-gantt/dhtmlxgantt
         tinymce: bundles/ekynaui/lib/tinymce/tinymce.min
         tinymce_config:
             route: ekyna_ui_tinymce_config
