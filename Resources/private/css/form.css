@@ -463,6 +463,9 @@ div.checkbox > label.required:after {
 .modal .modal-header .close:hover {
     opacity: .5;
 }
+.bootstrap-dialog .bootstrap-dialog-message {
+    font-size: 13px
+}
 
 /* Responsive */
 @media ( max-width: 767px) {
