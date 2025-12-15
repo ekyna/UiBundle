@@ -188,7 +188,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
                 header = jqXHR.getResponseHeader('Content-Type');
 
             if (null === header) {
-                jqXHR.getResponseHeader('content-type')
+                header = jqXHR.getResponseHeader('content-type')
             }
 
             if (/json/.test(header)) {
@@ -203,8 +203,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
             const that = this,
                 $that = $(this);
 
-            let type = this.getContentType(jqXHR),
-                event;
+            let type = this.getContentType(jqXHR);
 
             this.submitButton = null;
 
@@ -234,7 +233,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
                 return false;
             }
 
-            event = $.Event('ekyna.modal.response');
+            let event = $.Event('ekyna.modal.response');
             event.modal = this;
             event.contentType = type;
             event.content = data;
