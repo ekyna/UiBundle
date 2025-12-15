@@ -1,20 +1,22 @@
 define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (require, $, BootstrapDialog) {
     "use strict";
 
-    var triggerSelector = 'button[data-modal], a[data-modal], [data-modal] > a';
+    const triggerSelector = 'button[data-modal], a[data-modal], [data-modal] > a';
 
-    var EkynaModal = function () {
+    let modal = null;
+
+    function EkynaModal() {
+        modal = this;
         this.dialog = new BootstrapDialog();
         this.form = null;
         this.shown = false;
 
-        var that = this,
+        const that = this,
             $that = $(this);
-
 
         // Handle shown dialog
         this.dialog.onShow(function () {
-            var event = $.Event('ekyna.modal.show');
+            const event = $.Event('ekyna.modal.show');
             event.modal = that;
             $that.trigger(event);
 
@@ -35,7 +37,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
         this.dialog.onShown(function () {
             that.shown = true;
 
-            var event = $.Event('ekyna.modal.shown');
+            const event = $.Event('ekyna.modal.shown');
             event.modal = that;
             $that.trigger(event);
         });
@@ -44,7 +46,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
         this.dialog.onHide(function () {
             that.shown = false;
 
-            var event = $.Event('ekyna.modal.hide');
+            const event = $.Event('ekyna.modal.hide');
             event.modal = that;
             $that.trigger(event);
             if (event.isDefaultPrevented()) {
@@ -59,10 +61,19 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
 
         // Handle hide dialog
         this.dialog.onHidden(function () {
-            var event = $.Event('ekyna.modal.hidden');
+            modal = null;
+
+            const event = $.Event('ekyna.modal.hidden');
             event.modal = that;
             $that.trigger(event);
         });
+    }
+
+    EkynaModal.getInstance = function() {
+        if (null === modal) {
+            modal = new EkynaModal();
+        }
+        return modal;
     };
 
     EkynaModal.prototype = {
@@ -70,7 +81,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
         load: function (params) {
             params.cache = false;
 
-            var that = this,
+            const that = this,
                 xhr = $.ajax(params);
 
             xhr.done(function (data, status, jqXHR) {
@@ -79,14 +90,14 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
 
             xhr.fail(function () {
                 console.log('Failed to load modal.');
-                var event = $.Event('ekyna.modal.load_fail');
+                const event = $.Event('ekyna.modal.load_fail');
                 $(that).trigger(event);
             });
 
             return xhr;
         },
         initForm: function ($form) {
-            var that = this;
+            const that = this;
 
             // @see https://github.com/select2/select2/issues/600
             $(this.dialog.getModal()).removeAttr('tabindex');
@@ -95,8 +106,8 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
                 that.form = Form.create($form);
                 that.form.init(that.dialog.getModal());
 
-                var submitForm = function ($button) {
-                    var formDom = that.form.getElement().get(0);
+                const submitForm = function ($button) {
+                    const formDom = that.form.getElement().get(0);
                     if (formDom.reportValidity && !formDom.reportValidity()) {
                         return;
                     }
@@ -107,7 +118,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
 
                     formDom._submitted = true;
 
-                    var $form = that.form.getElement(), data = {};
+                    const $form = that.form.getElement(), data = {};
                     that.dialog.enableButtons(false);
 
                     $button = $button || $form.find('button[type=submit]').eq(0);
@@ -119,7 +130,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
                             data[$button.attr('name')] = $button.attr('value');
                         }
                     } else {
-                        var button = that.dialog.getButton('submit');
+                        const button = that.dialog.getButton('submit');
                         if (button) {
                             button.toggleSpin(true);
                         }
@@ -173,7 +184,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
             });
         },
         getContentType: function (jqXHR) {
-            var type = 'html',
+            let type = 'html',
                 header = jqXHR.getResponseHeader('Content-Type');
 
             if (null === header) {
@@ -189,9 +200,10 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
             return type;
         },
         handleResponse: function (data, status, jqXHR) {
-            var that = this,
-                $that = $(this),
-                type = this.getContentType(jqXHR),
+            const that = this,
+                $that = $(this);
+
+            let type = this.getContentType(jqXHR),
                 event;
 
             this.submitButton = null;
@@ -243,17 +255,17 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
                 return this;
             }
 
-            var $xmlData = $(data);
+            const $xmlData = $(data);
 
             // Content
-            var $content = $xmlData.find('content');
+            const $content = $xmlData.find('content');
             if ($content.length > 0) {
                 type = $content.attr('type');
                 event = $.Event('ekyna.modal.content');
                 event.modal = this;
                 event.contentType = type;
 
-                var content = $content.text();
+                const content = $content.text();
 
                 // Data content type
                 if (type === 'data') {
@@ -274,7 +286,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
                 }
 
                 // Html content type
-                var $html = $(content);
+                const $html = $(content);
                 event.content = $html;
                 $that.trigger(event);
                 if (event.isDefaultPrevented()) {
@@ -284,7 +296,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
                 this.dialog.setMessage($html);
 
                 // Form content type
-                var $form = $html.is('form.modal-form') ? $html : $html.find('form.modal-form:first');
+                const $form = $html.is('form.modal-form') ? $html : $html.find('form.modal-form:first');
                 if ($form.length === 1) {
                     if (that.shown) {
                         that.initForm($form);
@@ -303,15 +315,15 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
             }
 
             // Title
-            var $title = $xmlData.find('title');
+            const $title = $xmlData.find('title');
             if (1 === $title.length) {
                 this.dialog.setTitle($title.text());
             }
 
             // Buttons
-            var $buttons = $xmlData.find('buttons');
+            const $buttons = $xmlData.find('buttons');
             if (1 === $buttons.length) {
-                var buttons = JSON.parse($buttons.text(), function (key, value) {
+                const buttons = JSON.parse($buttons.text(), function (key, value) {
                     if (value && (typeof value === 'string') && value.indexOf("function") === 0) {
                         return new Function('return ' + value)();
                     }
@@ -355,7 +367,7 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
             }
 
             // Type and Size
-            var config = JSON.parse($xmlData.find('config').text());
+            const config = JSON.parse($xmlData.find('config').text());
             if (typeof config.type !== 'undefined') {
                 this.dialog.setType(config.type);
             }
@@ -393,15 +405,13 @@ define(['require', 'jquery', 'bootstrap/dialog', 'ekyna-polyfill'], function (re
     };
 
     // Auto modal buttons and links
-    $(document).on('click', triggerSelector, function (e) {
+    $(document).on('click', triggerSelector, (e) => {
         e.preventDefault();
 
-        var modal = new EkynaModal();
-        modal.load({url: $(e.currentTarget).attr('href')});
+        EkynaModal.getInstance().load({url: $(e.currentTarget).attr('href')});
 
         return false;
     });
 
     return EkynaModal;
-
 });
